@@ -1,0 +1,144 @@
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\obj\Debug\TestAPITokenProject.csprojResolveAssemblyReference.cache
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\ApplicationInsights.config
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\roslyn\csc.exe
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\roslyn\System.Collections.Immutable.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\roslyn\System.Reflection.Metadata.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\roslyn\vbc.exe
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\roslyn\VBCSCompiler.exe
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\roslyn\VBCSCompiler.exe.config
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\TestAPITokenProject.dll.config
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\TestAPITokenProject.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\TestAPITokenProject.pdb
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.AI.Agent.Intercept.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.AI.DependencyCollector.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.AI.PerfCounterCollector.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.AI.ServerTelemetryChannel.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.AI.Web.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.AI.WindowsServer.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.ApplicationInsights.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.Owin.Cors.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.Owin.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.Owin.Security.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.Owin.Security.OAuth.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.Web.Infrastructure.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Newtonsoft.Json.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Owin.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\System.Net.Http.Formatting.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Cors.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Helpers.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Http.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Http.WebHost.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Mvc.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Razor.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Webpages.Deployment.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Webpages.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Webpages.Razor.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\TestProjectCom.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\TestProjectCom.pdb
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.AI.DependencyCollector.xml
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.AI.ServerTelemetryChannel.xml
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.AI.Web.xml
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.AI.WindowsServer.xml
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.ApplicationInsights.xml
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.Owin.xml
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.Owin.Cors.xml
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.Owin.Security.xml
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.Owin.Security.OAuth.xml
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Razor.xml
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Webpages.xml
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Webpages.Deployment.xml
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Webpages.Razor.xml
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Helpers.xml
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Mvc.xml
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\Newtonsoft.Json.xml
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\System.Net.Http.Formatting.xml
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Http.xml
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Http.WebHost.xml
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\obj\Debug\TestAPITokenProject.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\obj\Debug\TestAPITokenProject.pdb
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Http.Cors.dll
+D:\GitSource\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Http.Cors.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\ApplicationInsights.config
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\roslyn\csc.exe
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\roslyn\vbc.exe
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\roslyn\VBCSCompiler.exe
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\TestAPITokenProject.dll.config
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\TestAPITokenProject.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\TestAPITokenProject.pdb
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.AI.Web.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.ApplicationInsights.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.Owin.Cors.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.Owin.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.Owin.Security.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Newtonsoft.Json.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Owin.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\System.Net.Http.Formatting.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Cors.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Helpers.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Http.Cors.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Http.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Http.WebHost.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Mvc.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Razor.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Webpages.Deployment.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Webpages.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Webpages.Razor.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\TestProjectCom.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\TestProjectCom.pdb
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.AI.Web.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.ApplicationInsights.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.Owin.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.Owin.Cors.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.Owin.Security.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Http.Cors.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Razor.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Webpages.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Webpages.Deployment.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Webpages.Razor.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Helpers.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Mvc.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\Newtonsoft.Json.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\System.Net.Http.Formatting.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Http.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Http.WebHost.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\obj\Debug\TestAPITokenProject.csprojResolveAssemblyReference.cache
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\obj\Debug\TestAPITokenProject.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\obj\Debug\TestAPITokenProject.pdb
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\EntityFramework.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\EntityFramework.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Http.Owin.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestAPITokenProject\bin\System.Web.Http.Owin.xml

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="111213476b8045e9a33d9c16aecdf281" Name="Diagram1">
+        <EntityTypeShape EntityType="blogsModel.Blog" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="blogsModel.Comment" Width="1.5" PointX="12.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="blogsModel.Post" Width="1.5" PointX="7.5" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="blogsModel.sysdiagram" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="blogsModel.UserRole" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="blogsModel.User" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="blogsModel.BlogContributer" Width="1.5" PointX="10.5" PointY="3.375" IsExpanded="true" />
+        <AssociationConnector Association="blogsModel.FK_BlogContributers_Blogs" ManuallyRouted="false" />
+        <AssociationConnector Association="blogsModel.FK_Blogs_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="blogsModel.FK_Posts_Blogs" ManuallyRouted="false" />
+        <AssociationConnector Association="blogsModel.FK_Comments_Posts" ManuallyRouted="false" />
+        <AssociationConnector Association="blogsModel.FK_Comments_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="blogsModel.FK_Posts_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="blogsModel.FK_Users_UserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="blogsModel.FK_BlogContributers_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

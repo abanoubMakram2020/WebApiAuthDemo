@@ -1,0 +1,39 @@
+D:\GitSource\TestAPITokenProject\TestProjectCom\bin\Debug\TestProjectCom.dll.config
+D:\GitSource\TestAPITokenProject\TestProjectCom\bin\Debug\TestProjectCom.dll
+D:\GitSource\TestAPITokenProject\TestProjectCom\bin\Debug\TestProjectCom.pdb
+D:\GitSource\TestAPITokenProject\TestProjectCom\bin\Debug\EntityFramework.dll
+D:\GitSource\TestAPITokenProject\TestProjectCom\bin\Debug\EntityFramework.SqlServer.dll
+D:\GitSource\TestAPITokenProject\TestProjectCom\bin\Debug\EntityFramework.xml
+D:\GitSource\TestAPITokenProject\TestProjectCom\bin\Debug\EntityFramework.SqlServer.xml
+D:\GitSource\TestAPITokenProject\TestProjectCom\obj\Debug\TestProjectCom.dll
+D:\GitSource\TestAPITokenProject\TestProjectCom\obj\Debug\TestProjectCom.pdb
+D:\GitSource\TestAPITokenProject\TestProjectCom\bin\Debug\Microsoft.Owin.dll
+D:\GitSource\TestAPITokenProject\TestProjectCom\bin\Debug\Microsoft.Owin.Host.SystemWeb.dll
+D:\GitSource\TestAPITokenProject\TestProjectCom\bin\Debug\Microsoft.Owin.Security.dll
+D:\GitSource\TestAPITokenProject\TestProjectCom\bin\Debug\Microsoft.Owin.Security.OAuth.dll
+D:\GitSource\TestAPITokenProject\TestProjectCom\bin\Debug\Newtonsoft.Json.dll
+D:\GitSource\TestAPITokenProject\TestProjectCom\bin\Debug\Owin.dll
+D:\GitSource\TestAPITokenProject\TestProjectCom\bin\Debug\Microsoft.Owin.xml
+D:\GitSource\TestAPITokenProject\TestProjectCom\bin\Debug\Microsoft.Owin.Host.SystemWeb.xml
+D:\GitSource\TestAPITokenProject\TestProjectCom\bin\Debug\Microsoft.Owin.Security.xml
+D:\GitSource\TestAPITokenProject\TestProjectCom\bin\Debug\Microsoft.Owin.Security.OAuth.xml
+D:\GitSource\TestAPITokenProject\TestProjectCom\bin\Debug\Newtonsoft.Json.xml
+D:\GitSource\TestAPITokenProject\TestProjectCom\obj\Debug\TestProjectCom.csprojResolveAssemblyReference.cache
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestProjectCom\bin\Debug\TestProjectCom.dll.config
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestProjectCom\bin\Debug\TestProjectCom.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestProjectCom\bin\Debug\TestProjectCom.pdb
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestProjectCom\bin\Debug\EntityFramework.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestProjectCom\bin\Debug\Microsoft.Owin.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestProjectCom\bin\Debug\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestProjectCom\bin\Debug\Microsoft.Owin.Security.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestProjectCom\bin\Debug\Microsoft.Owin.Security.OAuth.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestProjectCom\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestProjectCom\bin\Debug\Owin.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestProjectCom\bin\Debug\EntityFramework.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestProjectCom\bin\Debug\Microsoft.Owin.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestProjectCom\bin\Debug\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestProjectCom\bin\Debug\Microsoft.Owin.Security.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestProjectCom\bin\Debug\Microsoft.Owin.Security.OAuth.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestProjectCom\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestProjectCom\obj\Debug\TestProjectCom.dll
+C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestProjectCom\obj\Debug\TestProjectCom.pdb

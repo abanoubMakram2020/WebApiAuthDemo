@@ -1,0 +1,530 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="blogsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Blogs.dbo.BlogContributers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="BlogContributers">
+    <Key>
+      <PropertyRef Name="FKBlogID" />
+      <PropertyRef Name="FKUserID" />
+      <PropertyRef Name="IsActive" />
+    </Key>
+    <Property Name="FKBlogID" Type="int" Nullable="false" />
+    <Property Name="FKUserID" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Blogs">
+    <Key>
+      <PropertyRef Name="BlogID" />
+    </Key>
+    <Property Name="BlogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BlogTitle" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="BlogDescription" Type="nvarchar" MaxLength="2000" />
+    <Property Name="BlogCreateDate" Type="datetime" Nullable="false" />
+    <Property Name="BlogIsBlocked" Type="bit" Nullable="false" />
+    <Property Name="BlogIsActive" Type="bit" Nullable="false" />
+    <Property Name="BlogHeaderPhoto" Type="nvarchar" MaxLength="300" />
+    <Property Name="FKUserID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comments">
+    <Key>
+      <PropertyRef Name="CommentID" />
+    </Key>
+    <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CommentBody" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="CommentCreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CommentIsBlocked" Type="bit" Nullable="false" />
+    <Property Name="CommentIsActive" Type="bit" Nullable="false" />
+    <Property Name="FKPostID" Type="int" Nullable="false" />
+    <Property Name="FKUserID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Posts">
+    <Key>
+      <PropertyRef Name="PostID" />
+    </Key>
+    <Property Name="PostID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PostTitle" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="PostBody" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PostCreateDate" Type="datetime" Nullable="false" />
+    <Property Name="PostIsBlocked" Type="bit" Nullable="false" />
+    <Property Name="PostIsActive" Type="bit" Nullable="false" />
+    <Property Name="PostKeyWords" Type="nvarchar" MaxLength="2000" />
+    <Property Name="PostIsPublished" Type="bit" Nullable="false" />
+    <Property Name="FKBlogID" Type="int" Nullable="false" />
+    <Property Name="FKUserID" Type="int" Nullable="false" />
+    <Property Name="IsCommentable" Type="bit" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="UserRoles">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="RoleIsAdmin" Type="bit" Nullable="false" />
+    <Property Name="RoleIsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserFirstName" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="UserLastName" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="UserNickName" Type="nvarchar" MaxLength="300" />
+    <Property Name="UserEmail" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="UserPassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserIsBlocked" Type="bit" Nullable="false" />
+    <Property Name="UserPhoto" Type="nvarchar" MaxLength="300" />
+    <Property Name="FKRoleID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_BlogContributers_Blogs">
+    <End Role="Blogs" Type="Self.Blogs" Multiplicity="1" />
+    <End Role="BlogContributers" Type="Self.BlogContributers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Blogs">
+        <PropertyRef Name="BlogID" />
+      </Principal>
+      <Dependent Role="BlogContributers">
+        <PropertyRef Name="FKBlogID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BlogContributers_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="BlogContributers" Type="Self.BlogContributers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="BlogContributers">
+        <PropertyRef Name="FKUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Blogs_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Blogs" Type="Self.Blogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Blogs">
+        <PropertyRef Name="FKUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comments_Posts">
+    <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
+    <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Posts">
+        <PropertyRef Name="PostID" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="FKPostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comments_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="FKUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Posts_Blogs">
+    <End Role="Blogs" Type="Self.Blogs" Multiplicity="1" />
+    <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Blogs">
+        <PropertyRef Name="BlogID" />
+      </Principal>
+      <Dependent Role="Posts">
+        <PropertyRef Name="FKBlogID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Posts_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Posts">
+        <PropertyRef Name="FKUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_UserRoles">
+    <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRoles">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="FKRoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="ChangeBlogActivateStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BlogId" Type="int" Mode="In" />
+    <Parameter Name="BlogIsActive" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="ChangeBlogBlockStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BlogId" Type="int" Mode="In" />
+    <Parameter Name="BlogIsBlocked" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="ChangeCommentActivateStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CommentID" Type="int" Mode="In" />
+    <Parameter Name="CommentIsActive" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="ChangeCommentBlockStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CommentID" Type="int" Mode="In" />
+    <Parameter Name="CommentIsBlocked" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="ChangePostActivateStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PostID" Type="int" Mode="In" />
+    <Parameter Name="PostIsActive" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="ChangePostBlockStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PostID" Type="int" Mode="In" />
+    <Parameter Name="PostIsBlocked" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="ChangeUserStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="UserIsBlocked" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="DeleteBlogContributersByIds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BlogID" Type="int" Mode="In" />
+    <Parameter Name="UserID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DeleteBlogsById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BlogID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DeleteCommentsById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CommentID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DeletePostsById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PostID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DeleteUserRolesById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RoleID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DeleteUsersById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="GetAllActiveBlogsByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="IsStudent" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetAllActiveByRoleName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RoleName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllBlogContributers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetAllBlogs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetAllComments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetAllPosts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetAllUserRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetAllUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetBlogByIdForUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BlogID" Type="int" Mode="In" />
+    <Parameter Name="UserID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetBlogContributersByIds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BlogID" Type="int" Mode="In" />
+    <Parameter Name="UserID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetBlogsById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BlogID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetBlogWithRelatedPosts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BlogID" Type="int" Mode="In" />
+    <Parameter Name="PageIndex" Type="int" Mode="In" />
+    <Parameter Name="PageSize" Type="int" Mode="In" />
+    <Parameter Name="RowsCount" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="GetCommentsById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CommentID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetPostsById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PostID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetPostWithRelatedData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PostID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetUserByEmailAndPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserEmail" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserPassword" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="GetUserRolesById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RoleID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetUsersById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="IncludeRoleData" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="InsertBlogContributers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BlogID" Type="int" Mode="In" />
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="IsActive" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="InsertBlogs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BlogID" Type="int" Mode="InOut" />
+    <Parameter Name="BlogTitle" Type="nvarchar" Mode="In" />
+    <Parameter Name="BlogDescription" Type="nvarchar" Mode="In" />
+    <Parameter Name="BlogCreateDate" Type="datetime" Mode="In" />
+    <Parameter Name="BlogIsBlocked" Type="bit" Mode="In" />
+    <Parameter Name="BlogIsActive" Type="bit" Mode="In" />
+    <Parameter Name="BlogHeaderPhoto" Type="nvarchar" Mode="In" />
+    <Parameter Name="FKUserID" Type="int" Mode="In" />
+    <Parameter Name="IsStudent" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="InsertComment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CommentID" Type="int" Mode="InOut" />
+    <Parameter Name="CommentBody" Type="nvarchar" Mode="In" />
+    <Parameter Name="CommentCreateDate" Type="datetime" Mode="In" />
+    <Parameter Name="CommentIsBlocked" Type="bit" Mode="In" />
+    <Parameter Name="CommentIsActive" Type="bit" Mode="In" />
+    <Parameter Name="FKPostID" Type="int" Mode="In" />
+    <Parameter Name="FKUserID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertPosts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PostID" Type="int" Mode="InOut" />
+    <Parameter Name="PostTitle" Type="nvarchar" Mode="In" />
+    <Parameter Name="PostBody" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="PostCreateDate" Type="datetime" Mode="In" />
+    <Parameter Name="PostIsBlocked" Type="bit" Mode="In" />
+    <Parameter Name="PostIsActive" Type="bit" Mode="In" />
+    <Parameter Name="PostKeyWords" Type="nvarchar" Mode="In" />
+    <Parameter Name="FKBlogID" Type="int" Mode="In" />
+    <Parameter Name="FKUserID" Type="int" Mode="In" />
+    <Parameter Name="IsCommentable" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="InsertUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="InOut" />
+    <Parameter Name="UserFirstName" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserLastName" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserNickName" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserEmail" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserPassword" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserIsBlocked" Type="bit" Mode="In" />
+    <Parameter Name="UserPhoto" Type="nvarchar" Mode="In" />
+    <Parameter Name="FKRoleID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertUserRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RoleID" Type="int" Mode="InOut" />
+    <Parameter Name="RoleName" Type="nvarchar" Mode="In" />
+    <Parameter Name="RoleIsAdmin" Type="bit" Mode="In" />
+    <Parameter Name="RoleIsActive" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="PostPublish" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PostID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SearchBlogContributers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LoginUserID" Type="int" Mode="In" />
+    <Parameter Name="BlogID" Type="int" Mode="In" />
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="IsActive" Type="bit" Mode="In" />
+    <Parameter Name="PageIndex" Type="int" Mode="In" />
+    <Parameter Name="PageSize" Type="int" Mode="In" />
+    <Parameter Name="RowsCount" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="SearchBlogs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BlogTitle" Type="nvarchar" Mode="In" />
+    <Parameter Name="BlogDescription" Type="nvarchar" Mode="In" />
+    <Parameter Name="DateFrom" Type="datetime" Mode="In" />
+    <Parameter Name="DateTo" Type="datetime" Mode="In" />
+    <Parameter Name="Block" Type="bit" Mode="In" />
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="PageIndex" Type="int" Mode="In" />
+    <Parameter Name="PageSize" Type="int" Mode="In" />
+    <Parameter Name="IsStudent" Type="int" Mode="In" />
+    <Parameter Name="RowsCount" Type="int" Mode="InOut" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="SearchComments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CommentBody" Type="nvarchar" Mode="In" />
+    <Parameter Name="DateFrom" Type="datetime" Mode="In" />
+    <Parameter Name="DateTo" Type="datetime" Mode="In" />
+    <Parameter Name="Block" Type="bit" Mode="In" />
+    <Parameter Name="PostID" Type="int" Mode="In" />
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="PageIndex" Type="int" Mode="In" />
+    <Parameter Name="PageSize" Type="int" Mode="In" />
+    <Parameter Name="RowsCount" Type="int" Mode="InOut" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="SearchPosts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PostTitle" Type="nvarchar" Mode="In" />
+    <Parameter Name="PostBody" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="PostKeyWords" Type="nvarchar" Mode="In" />
+    <Parameter Name="DateFrom" Type="datetime" Mode="In" />
+    <Parameter Name="DateTo" Type="datetime" Mode="In" />
+    <Parameter Name="Block" Type="bit" Mode="In" />
+    <Parameter Name="BlogID" Type="int" Mode="In" />
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="PageIndex" Type="int" Mode="In" />
+    <Parameter Name="PageSize" Type="int" Mode="In" />
+    <Parameter Name="RowsCount" Type="int" Mode="InOut" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+    <Parameter Name="PostIsPublished" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="SearchUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserFirstName" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserLastName" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserNickName" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserEmail" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserIsBlocked" Type="bit" Mode="In" />
+    <Parameter Name="FKRoleID" Type="int" Mode="In" />
+    <Parameter Name="PageIndex" Type="int" Mode="In" />
+    <Parameter Name="PageSize" Type="int" Mode="In" />
+    <Parameter Name="RowsCount" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="UpdateBlogContributers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BlogID" Type="int" Mode="In" />
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="IsActive" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="UpdateBlogs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BlogID" Type="int" Mode="In" />
+    <Parameter Name="BlogTitle" Type="nvarchar" Mode="In" />
+    <Parameter Name="BlogDescription" Type="nvarchar" Mode="In" />
+    <Parameter Name="BlogCreateDate" Type="datetime" Mode="In" />
+    <Parameter Name="BlogIsBlocked" Type="bit" Mode="In" />
+    <Parameter Name="BlogIsActive" Type="bit" Mode="In" />
+    <Parameter Name="BlogHeaderPhoto" Type="nvarchar" Mode="In" />
+    <Parameter Name="FKUserID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdateComment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CommentID" Type="int" Mode="In" />
+    <Parameter Name="CommentBody" Type="nvarchar" Mode="In" />
+    <Parameter Name="CommentCreateDate" Type="datetime" Mode="In" />
+    <Parameter Name="CommentIsBlocked" Type="bit" Mode="In" />
+    <Parameter Name="CommentIsActive" Type="bit" Mode="In" />
+    <Parameter Name="FKPostID" Type="int" Mode="In" />
+    <Parameter Name="FKUserID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdatePosts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PostID" Type="int" Mode="In" />
+    <Parameter Name="PostTitle" Type="nvarchar" Mode="In" />
+    <Parameter Name="PostBody" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="PostCreateDate" Type="datetime" Mode="In" />
+    <Parameter Name="PostIsBlocked" Type="bit" Mode="In" />
+    <Parameter Name="PostIsActive" Type="bit" Mode="In" />
+    <Parameter Name="PostKeyWords" Type="nvarchar" Mode="In" />
+    <Parameter Name="FKBlogID" Type="int" Mode="In" />
+    <Parameter Name="FKUserID" Type="int" Mode="In" />
+    <Parameter Name="IsCommentable" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="UpdateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="UserFirstName" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserLastName" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserNickName" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserEmail" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserPassword" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserIsBlocked" Type="bit" Mode="In" />
+    <Parameter Name="UserPhoto" Type="nvarchar" Mode="In" />
+    <Parameter Name="FKRoleID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdateUserRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RoleID" Type="int" Mode="In" />
+    <Parameter Name="RoleName" Type="nvarchar" Mode="In" />
+    <Parameter Name="RoleIsAdmin" Type="bit" Mode="In" />
+    <Parameter Name="RoleIsActive" Type="bit" Mode="In" />
+  </Function>
+  <EntityContainer Name="blogsModelStoreContainer">
+    <EntitySet Name="Blogs" EntityType="Self.Blogs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BlogContributers" EntityType="Self.BlogContributers" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[BlogContributers].[FKBlogID] AS [FKBlogID], 
+[BlogContributers].[FKUserID] AS [FKUserID], 
+[BlogContributers].[IsActive] AS [IsActive]
+FROM [dbo].[BlogContributers] AS [BlogContributers]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_BlogContributers_Blogs" Association="Self.FK_BlogContributers_Blogs">
+      <End Role="Blogs" EntitySet="Blogs" />
+      <End Role="BlogContributers" EntitySet="BlogContributers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BlogContributers_Users" Association="Self.FK_BlogContributers_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="BlogContributers" EntitySet="BlogContributers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Blogs_Users" Association="Self.FK_Blogs_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Blogs" EntitySet="Blogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comments_Posts" Association="Self.FK_Comments_Posts">
+      <End Role="Posts" EntitySet="Posts" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comments_Users" Association="Self.FK_Comments_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Posts_Blogs" Association="Self.FK_Posts_Blogs">
+      <End Role="Blogs" EntitySet="Blogs" />
+      <End Role="Posts" EntitySet="Posts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Posts_Users" Association="Self.FK_Posts_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Posts" EntitySet="Posts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_UserRoles" Association="Self.FK_Users_UserRoles">
+      <End Role="UserRoles" EntitySet="UserRoles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

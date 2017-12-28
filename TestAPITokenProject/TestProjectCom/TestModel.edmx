@@ -1,0 +1,1700 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="blogsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Blogs.dbo.BlogContributers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="BlogContributers">
+          <Key>
+            <PropertyRef Name="FKBlogID" />
+            <PropertyRef Name="FKUserID" />
+            <PropertyRef Name="IsActive" />
+          </Key>
+          <Property Name="FKBlogID" Type="int" Nullable="false" />
+          <Property Name="FKUserID" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Blogs">
+          <Key>
+            <PropertyRef Name="BlogID" />
+          </Key>
+          <Property Name="BlogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BlogTitle" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="BlogDescription" Type="nvarchar" MaxLength="2000" />
+          <Property Name="BlogCreateDate" Type="datetime" Nullable="false" />
+          <Property Name="BlogIsBlocked" Type="bit" Nullable="false" />
+          <Property Name="BlogIsActive" Type="bit" Nullable="false" />
+          <Property Name="BlogHeaderPhoto" Type="nvarchar" MaxLength="300" />
+          <Property Name="FKUserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CommentBody" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="CommentCreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CommentIsBlocked" Type="bit" Nullable="false" />
+          <Property Name="CommentIsActive" Type="bit" Nullable="false" />
+          <Property Name="FKPostID" Type="int" Nullable="false" />
+          <Property Name="FKUserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Posts">
+          <Key>
+            <PropertyRef Name="PostID" />
+          </Key>
+          <Property Name="PostID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PostTitle" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="PostBody" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PostCreateDate" Type="datetime" Nullable="false" />
+          <Property Name="PostIsBlocked" Type="bit" Nullable="false" />
+          <Property Name="PostIsActive" Type="bit" Nullable="false" />
+          <Property Name="PostKeyWords" Type="nvarchar" MaxLength="2000" />
+          <Property Name="PostIsPublished" Type="bit" Nullable="false" />
+          <Property Name="FKBlogID" Type="int" Nullable="false" />
+          <Property Name="FKUserID" Type="int" Nullable="false" />
+          <Property Name="IsCommentable" Type="bit" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="UserRoles">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="RoleIsAdmin" Type="bit" Nullable="false" />
+          <Property Name="RoleIsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserFirstName" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="UserLastName" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="UserNickName" Type="nvarchar" MaxLength="300" />
+          <Property Name="UserEmail" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="UserPassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserIsBlocked" Type="bit" Nullable="false" />
+          <Property Name="UserPhoto" Type="nvarchar" MaxLength="300" />
+          <Property Name="FKRoleID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BlogContributers_Blogs">
+          <End Role="Blogs" Type="Self.Blogs" Multiplicity="1" />
+          <End Role="BlogContributers" Type="Self.BlogContributers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Blogs">
+              <PropertyRef Name="BlogID" />
+            </Principal>
+            <Dependent Role="BlogContributers">
+              <PropertyRef Name="FKBlogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlogContributers_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="BlogContributers" Type="Self.BlogContributers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="BlogContributers">
+              <PropertyRef Name="FKUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Blogs_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Blogs" Type="Self.Blogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Blogs">
+              <PropertyRef Name="FKUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Posts">
+          <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="PostID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="FKPostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="FKUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_Blogs">
+          <End Role="Blogs" Type="Self.Blogs" Multiplicity="1" />
+          <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Blogs">
+              <PropertyRef Name="BlogID" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="FKBlogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="FKUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_UserRoles">
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRoles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="FKRoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="ChangeBlogActivateStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BlogId" Type="int" Mode="In" />
+          <Parameter Name="BlogIsActive" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="ChangeBlogBlockStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BlogId" Type="int" Mode="In" />
+          <Parameter Name="BlogIsBlocked" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="ChangeCommentActivateStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CommentID" Type="int" Mode="In" />
+          <Parameter Name="CommentIsActive" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="ChangeCommentBlockStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CommentID" Type="int" Mode="In" />
+          <Parameter Name="CommentIsBlocked" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="ChangePostActivateStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PostID" Type="int" Mode="In" />
+          <Parameter Name="PostIsActive" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="ChangePostBlockStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PostID" Type="int" Mode="In" />
+          <Parameter Name="PostIsBlocked" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="ChangeUserStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="UserIsBlocked" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="DeleteBlogContributersByIds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BlogID" Type="int" Mode="In" />
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteBlogsById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BlogID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteCommentsById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CommentID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeletePostsById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PostID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteUserRolesById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RoleID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteUsersById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="GetAllActiveBlogsByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="IsStudent" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetAllActiveByRoleName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RoleName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetAllBlogContributers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllBlogs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllComments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllPosts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllUserRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetBlogByIdForUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BlogID" Type="int" Mode="In" />
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetBlogContributersByIds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BlogID" Type="int" Mode="In" />
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetBlogsById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BlogID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetBlogWithRelatedPosts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BlogID" Type="int" Mode="In" />
+          <Parameter Name="PageIndex" Type="int" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+          <Parameter Name="RowsCount" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="GetCommentsById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CommentID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetPostsById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PostID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetPostWithRelatedData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PostID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUserByEmailAndPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserEmail" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserPassword" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetUserRolesById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RoleID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUsersById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="IncludeRoleData" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="InsertBlogContributers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BlogID" Type="int" Mode="In" />
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="InsertBlogs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BlogID" Type="int" Mode="InOut" />
+          <Parameter Name="BlogTitle" Type="nvarchar" Mode="In" />
+          <Parameter Name="BlogDescription" Type="nvarchar" Mode="In" />
+          <Parameter Name="BlogCreateDate" Type="datetime" Mode="In" />
+          <Parameter Name="BlogIsBlocked" Type="bit" Mode="In" />
+          <Parameter Name="BlogIsActive" Type="bit" Mode="In" />
+          <Parameter Name="BlogHeaderPhoto" Type="nvarchar" Mode="In" />
+          <Parameter Name="FKUserID" Type="int" Mode="In" />
+          <Parameter Name="IsStudent" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="InsertComment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CommentID" Type="int" Mode="InOut" />
+          <Parameter Name="CommentBody" Type="nvarchar" Mode="In" />
+          <Parameter Name="CommentCreateDate" Type="datetime" Mode="In" />
+          <Parameter Name="CommentIsBlocked" Type="bit" Mode="In" />
+          <Parameter Name="CommentIsActive" Type="bit" Mode="In" />
+          <Parameter Name="FKPostID" Type="int" Mode="In" />
+          <Parameter Name="FKUserID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertPosts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PostID" Type="int" Mode="InOut" />
+          <Parameter Name="PostTitle" Type="nvarchar" Mode="In" />
+          <Parameter Name="PostBody" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="PostCreateDate" Type="datetime" Mode="In" />
+          <Parameter Name="PostIsBlocked" Type="bit" Mode="In" />
+          <Parameter Name="PostIsActive" Type="bit" Mode="In" />
+          <Parameter Name="PostKeyWords" Type="nvarchar" Mode="In" />
+          <Parameter Name="FKBlogID" Type="int" Mode="In" />
+          <Parameter Name="FKUserID" Type="int" Mode="In" />
+          <Parameter Name="IsCommentable" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="InsertUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="InOut" />
+          <Parameter Name="UserFirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserLastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserNickName" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserEmail" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserPassword" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserIsBlocked" Type="bit" Mode="In" />
+          <Parameter Name="UserPhoto" Type="nvarchar" Mode="In" />
+          <Parameter Name="FKRoleID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertUserRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RoleID" Type="int" Mode="InOut" />
+          <Parameter Name="RoleName" Type="nvarchar" Mode="In" />
+          <Parameter Name="RoleIsAdmin" Type="bit" Mode="In" />
+          <Parameter Name="RoleIsActive" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="PostPublish" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PostID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SearchBlogContributers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LoginUserID" Type="int" Mode="In" />
+          <Parameter Name="BlogID" Type="int" Mode="In" />
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+          <Parameter Name="PageIndex" Type="int" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+          <Parameter Name="RowsCount" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="SearchBlogs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BlogTitle" Type="nvarchar" Mode="In" />
+          <Parameter Name="BlogDescription" Type="nvarchar" Mode="In" />
+          <Parameter Name="DateFrom" Type="datetime" Mode="In" />
+          <Parameter Name="DateTo" Type="datetime" Mode="In" />
+          <Parameter Name="Block" Type="bit" Mode="In" />
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="PageIndex" Type="int" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+          <Parameter Name="IsStudent" Type="int" Mode="In" />
+          <Parameter Name="RowsCount" Type="int" Mode="InOut" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SearchComments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CommentBody" Type="nvarchar" Mode="In" />
+          <Parameter Name="DateFrom" Type="datetime" Mode="In" />
+          <Parameter Name="DateTo" Type="datetime" Mode="In" />
+          <Parameter Name="Block" Type="bit" Mode="In" />
+          <Parameter Name="PostID" Type="int" Mode="In" />
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="PageIndex" Type="int" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+          <Parameter Name="RowsCount" Type="int" Mode="InOut" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SearchPosts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PostTitle" Type="nvarchar" Mode="In" />
+          <Parameter Name="PostBody" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="PostKeyWords" Type="nvarchar" Mode="In" />
+          <Parameter Name="DateFrom" Type="datetime" Mode="In" />
+          <Parameter Name="DateTo" Type="datetime" Mode="In" />
+          <Parameter Name="Block" Type="bit" Mode="In" />
+          <Parameter Name="BlogID" Type="int" Mode="In" />
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="PageIndex" Type="int" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+          <Parameter Name="RowsCount" Type="int" Mode="InOut" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+          <Parameter Name="PostIsPublished" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SearchUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserFirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserLastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserNickName" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserEmail" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserIsBlocked" Type="bit" Mode="In" />
+          <Parameter Name="FKRoleID" Type="int" Mode="In" />
+          <Parameter Name="PageIndex" Type="int" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+          <Parameter Name="RowsCount" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="UpdateBlogContributers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BlogID" Type="int" Mode="In" />
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="UpdateBlogs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BlogID" Type="int" Mode="In" />
+          <Parameter Name="BlogTitle" Type="nvarchar" Mode="In" />
+          <Parameter Name="BlogDescription" Type="nvarchar" Mode="In" />
+          <Parameter Name="BlogCreateDate" Type="datetime" Mode="In" />
+          <Parameter Name="BlogIsBlocked" Type="bit" Mode="In" />
+          <Parameter Name="BlogIsActive" Type="bit" Mode="In" />
+          <Parameter Name="BlogHeaderPhoto" Type="nvarchar" Mode="In" />
+          <Parameter Name="FKUserID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateComment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CommentID" Type="int" Mode="In" />
+          <Parameter Name="CommentBody" Type="nvarchar" Mode="In" />
+          <Parameter Name="CommentCreateDate" Type="datetime" Mode="In" />
+          <Parameter Name="CommentIsBlocked" Type="bit" Mode="In" />
+          <Parameter Name="CommentIsActive" Type="bit" Mode="In" />
+          <Parameter Name="FKPostID" Type="int" Mode="In" />
+          <Parameter Name="FKUserID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdatePosts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PostID" Type="int" Mode="In" />
+          <Parameter Name="PostTitle" Type="nvarchar" Mode="In" />
+          <Parameter Name="PostBody" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="PostCreateDate" Type="datetime" Mode="In" />
+          <Parameter Name="PostIsBlocked" Type="bit" Mode="In" />
+          <Parameter Name="PostIsActive" Type="bit" Mode="In" />
+          <Parameter Name="PostKeyWords" Type="nvarchar" Mode="In" />
+          <Parameter Name="FKBlogID" Type="int" Mode="In" />
+          <Parameter Name="FKUserID" Type="int" Mode="In" />
+          <Parameter Name="IsCommentable" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="UpdateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="UserFirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserLastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserNickName" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserEmail" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserPassword" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserIsBlocked" Type="bit" Mode="In" />
+          <Parameter Name="UserPhoto" Type="nvarchar" Mode="In" />
+          <Parameter Name="FKRoleID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateUserRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RoleID" Type="int" Mode="In" />
+          <Parameter Name="RoleName" Type="nvarchar" Mode="In" />
+          <Parameter Name="RoleIsAdmin" Type="bit" Mode="In" />
+          <Parameter Name="RoleIsActive" Type="bit" Mode="In" />
+        </Function>
+        <EntityContainer Name="blogsModelStoreContainer">
+          <EntitySet Name="Blogs" EntityType="Self.Blogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BlogContributers" EntityType="Self.BlogContributers" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[BlogContributers].[FKBlogID] AS [FKBlogID], 
+[BlogContributers].[FKUserID] AS [FKUserID], 
+[BlogContributers].[IsActive] AS [IsActive]
+FROM [dbo].[BlogContributers] AS [BlogContributers]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_BlogContributers_Blogs" Association="Self.FK_BlogContributers_Blogs">
+            <End Role="Blogs" EntitySet="Blogs" />
+            <End Role="BlogContributers" EntitySet="BlogContributers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlogContributers_Users" Association="Self.FK_BlogContributers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="BlogContributers" EntitySet="BlogContributers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Blogs_Users" Association="Self.FK_Blogs_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Blogs" EntitySet="Blogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Posts" Association="Self.FK_Comments_Posts">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Users" Association="Self.FK_Comments_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_Blogs" Association="Self.FK_Posts_Blogs">
+            <End Role="Blogs" EntitySet="Blogs" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_Users" Association="Self.FK_Posts_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_UserRoles" Association="Self.FK_Users_UserRoles">
+            <End Role="UserRoles" EntitySet="UserRoles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="blogsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Blog">
+          <Key>
+            <PropertyRef Name="BlogID" />
+          </Key>
+          <Property Name="BlogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BlogTitle" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BlogDescription" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="BlogCreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BlogIsBlocked" Type="Boolean" Nullable="false" />
+          <Property Name="BlogIsActive" Type="Boolean" Nullable="false" />
+          <Property Name="BlogHeaderPhoto" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="FKUserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BlogContributers" Relationship="Self.FK_BlogContributers_Blogs" FromRole="Blogs" ToRole="BlogContributers" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Blogs_Users" FromRole="Blogs" ToRole="Users" />
+          <NavigationProperty Name="Posts" Relationship="Self.FK_Posts_Blogs" FromRole="Blogs" ToRole="Posts" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CommentBody" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CommentCreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CommentIsBlocked" Type="Boolean" Nullable="false" />
+          <Property Name="CommentIsActive" Type="Boolean" Nullable="false" />
+          <Property Name="FKPostID" Type="Int32" Nullable="false" />
+          <Property Name="FKUserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Post" Relationship="Self.FK_Comments_Posts" FromRole="Comments" ToRole="Posts" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Comments_Users" FromRole="Comments" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="PostID" />
+          </Key>
+          <Property Name="PostID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PostTitle" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PostBody" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PostCreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PostIsBlocked" Type="Boolean" Nullable="false" />
+          <Property Name="PostIsActive" Type="Boolean" Nullable="false" />
+          <Property Name="PostKeyWords" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="PostIsPublished" Type="Boolean" Nullable="false" />
+          <Property Name="FKBlogID" Type="Int32" Nullable="false" />
+          <Property Name="FKUserID" Type="Int32" Nullable="false" />
+          <Property Name="IsCommentable" Type="Boolean" />
+          <NavigationProperty Name="Blog" Relationship="Self.FK_Posts_Blogs" FromRole="Posts" ToRole="Blogs" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_Comments_Posts" FromRole="Posts" ToRole="Comments" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Posts_Users" FromRole="Posts" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleIsAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="RoleIsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_UserRoles" FromRole="UserRoles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserFirstName" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserLastName" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserNickName" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="UserEmail" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserIsBlocked" Type="Boolean" Nullable="false" />
+          <Property Name="UserPhoto" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="FKRoleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Blogs" Relationship="Self.FK_Blogs_Users" FromRole="Users" ToRole="Blogs" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_Comments_Users" FromRole="Users" ToRole="Comments" />
+          <NavigationProperty Name="Posts" Relationship="Self.FK_Posts_Users" FromRole="Users" ToRole="Posts" />
+          <NavigationProperty Name="UserRole" Relationship="Self.FK_Users_UserRoles" FromRole="Users" ToRole="UserRoles" />
+          <NavigationProperty Name="BlogContributers" Relationship="Self.FK_BlogContributers_Users" FromRole="Users" ToRole="BlogContributers" />
+        </EntityType>
+        <EntityType Name="BlogContributer">
+          <Key>
+            <PropertyRef Name="FKBlogID" />
+            <PropertyRef Name="FKUserID" />
+            <PropertyRef Name="IsActive" />
+          </Key>
+          <Property Name="FKBlogID" Type="Int32" Nullable="false" />
+          <Property Name="FKUserID" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Blog" Relationship="Self.FK_BlogContributers_Blogs" FromRole="BlogContributers" ToRole="Blogs" />
+          <NavigationProperty Name="User" Relationship="Self.FK_BlogContributers_Users" FromRole="BlogContributers" ToRole="Users" />
+        </EntityType>
+        <Association Name="FK_BlogContributers_Blogs">
+          <End Role="Blogs" Type="Self.Blog" Multiplicity="1" />
+          <End Role="BlogContributers" Type="Self.BlogContributer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Blogs">
+              <PropertyRef Name="BlogID" />
+            </Principal>
+            <Dependent Role="BlogContributers">
+              <PropertyRef Name="FKBlogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Blogs_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Blogs" Type="Self.Blog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Blogs">
+              <PropertyRef Name="FKUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_Blogs">
+          <End Role="Blogs" Type="Self.Blog" Multiplicity="1" />
+          <End Role="Posts" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Blogs">
+              <PropertyRef Name="BlogID" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="FKBlogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Posts">
+          <End Role="Posts" Type="Self.Post" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="PostID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="FKPostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="FKUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Posts" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="FKUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_UserRoles">
+          <End Role="UserRoles" Type="Self.UserRole" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRoles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="FKRoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlogContributers_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="BlogContributers" Type="Self.BlogContributer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="BlogContributers">
+              <PropertyRef Name="FKUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BlogsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Blogs" EntityType="Self.Blog" />
+          <EntitySet Name="Comments" EntityType="Self.Comment" />
+          <EntitySet Name="Posts" EntityType="Self.Post" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="BlogContributers" EntityType="Self.BlogContributer" />
+          <AssociationSet Name="FK_BlogContributers_Blogs" Association="Self.FK_BlogContributers_Blogs">
+            <End Role="Blogs" EntitySet="Blogs" />
+            <End Role="BlogContributers" EntitySet="BlogContributers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Blogs_Users" Association="Self.FK_Blogs_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Blogs" EntitySet="Blogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_Blogs" Association="Self.FK_Posts_Blogs">
+            <End Role="Blogs" EntitySet="Blogs" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Posts" Association="Self.FK_Comments_Posts">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Users" Association="Self.FK_Comments_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_Users" Association="Self.FK_Posts_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_UserRoles" Association="Self.FK_Users_UserRoles">
+            <End Role="UserRoles" EntitySet="UserRoles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlogContributers_Users" Association="Self.FK_BlogContributers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="BlogContributers" EntitySet="BlogContributers" />
+          </AssociationSet>
+          <FunctionImport Name="ChangeBlogActivateStatus">
+            <Parameter Name="BlogId" Mode="In" Type="Int32" />
+            <Parameter Name="BlogIsActive" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ChangeBlogBlockStatus">
+            <Parameter Name="BlogId" Mode="In" Type="Int32" />
+            <Parameter Name="BlogIsBlocked" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ChangeCommentActivateStatus">
+            <Parameter Name="CommentID" Mode="In" Type="Int32" />
+            <Parameter Name="CommentIsActive" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ChangeCommentBlockStatus">
+            <Parameter Name="CommentID" Mode="In" Type="Int32" />
+            <Parameter Name="CommentIsBlocked" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ChangePostActivateStatus">
+            <Parameter Name="PostID" Mode="In" Type="Int32" />
+            <Parameter Name="PostIsActive" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ChangePostBlockStatus">
+            <Parameter Name="PostID" Mode="In" Type="Int32" />
+            <Parameter Name="PostIsBlocked" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ChangeUserStatus">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="UserIsBlocked" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteBlogContributersByIds">
+            <Parameter Name="BlogID" Mode="In" Type="Int32" />
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteBlogsById">
+            <Parameter Name="BlogID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteCommentsById">
+            <Parameter Name="CommentID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeletePostsById">
+            <Parameter Name="PostID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteUserRolesById">
+            <Parameter Name="RoleID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteUsersById">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllActiveBlogsByUserId" ReturnType="Collection(blogsModel.GetAllActiveBlogsByUserId_Result)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="IsStudent" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllActiveByRoleName" ReturnType="Collection(blogsModel.GetAllActiveByRoleName_Result)">
+            <Parameter Name="RoleName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllBlogContributers" ReturnType="Collection(blogsModel.GetAllBlogContributers_Result)" />
+          <FunctionImport Name="GetAllBlogs" ReturnType="Collection(blogsModel.GetAllBlogs_Result)" />
+          <FunctionImport Name="GetAllComments" ReturnType="Collection(blogsModel.GetAllComments_Result)" />
+          <FunctionImport Name="GetAllPosts" ReturnType="Collection(blogsModel.GetAllPosts_Result)" />
+          <FunctionImport Name="GetAllUserRoles" ReturnType="Collection(blogsModel.GetAllUserRoles_Result)" />
+          <FunctionImport Name="GetAllUsers" ReturnType="Collection(blogsModel.GetAllUsers_Result)" />
+          <FunctionImport Name="GetBlogByIdForUser" ReturnType="Collection(blogsModel.GetBlogByIdForUser_Result)">
+            <Parameter Name="BlogID" Mode="In" Type="Int32" />
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetBlogContributersByIds" ReturnType="Collection(blogsModel.GetBlogContributersByIds_Result)">
+            <Parameter Name="BlogID" Mode="In" Type="Int32" />
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetBlogsById" ReturnType="Collection(blogsModel.GetBlogsById_Result)">
+            <Parameter Name="BlogID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetBlogWithRelatedPosts" ReturnType="Collection(blogsModel.GetBlogWithRelatedPosts_Result)">
+            <Parameter Name="BlogID" Mode="In" Type="Int32" />
+            <Parameter Name="PageIndex" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="RowsCount" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetCommentsById" ReturnType="Collection(blogsModel.GetCommentsById_Result)">
+            <Parameter Name="CommentID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetPostsById" ReturnType="Collection(blogsModel.GetPostsById_Result)">
+            <Parameter Name="PostID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetPostWithRelatedData" ReturnType="Collection(blogsModel.GetPostWithRelatedData_Result)">
+            <Parameter Name="PostID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserByEmailAndPassword" ReturnType="Collection(blogsModel.GetUserByEmailAndPassword_Result)">
+            <Parameter Name="UserEmail" Mode="In" Type="String" />
+            <Parameter Name="UserPassword" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserRolesById" ReturnType="Collection(blogsModel.GetUserRolesById_Result)">
+            <Parameter Name="RoleID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUsersById" ReturnType="Collection(blogsModel.GetUsersById_Result)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="IncludeRoleData" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="InsertBlogContributers">
+            <Parameter Name="BlogID" Mode="In" Type="Int32" />
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="InsertBlogs">
+            <Parameter Name="BlogID" Mode="InOut" Type="Int32" />
+            <Parameter Name="BlogTitle" Mode="In" Type="String" />
+            <Parameter Name="BlogDescription" Mode="In" Type="String" />
+            <Parameter Name="BlogCreateDate" Mode="In" Type="DateTime" />
+            <Parameter Name="BlogIsBlocked" Mode="In" Type="Boolean" />
+            <Parameter Name="BlogIsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="BlogHeaderPhoto" Mode="In" Type="String" />
+            <Parameter Name="FKUserID" Mode="In" Type="Int32" />
+            <Parameter Name="IsStudent" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="InsertComment">
+            <Parameter Name="CommentID" Mode="InOut" Type="Int32" />
+            <Parameter Name="CommentBody" Mode="In" Type="String" />
+            <Parameter Name="CommentCreateDate" Mode="In" Type="DateTime" />
+            <Parameter Name="CommentIsBlocked" Mode="In" Type="Boolean" />
+            <Parameter Name="CommentIsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="FKPostID" Mode="In" Type="Int32" />
+            <Parameter Name="FKUserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertPosts">
+            <Parameter Name="PostID" Mode="InOut" Type="Int32" />
+            <Parameter Name="PostTitle" Mode="In" Type="String" />
+            <Parameter Name="PostBody" Mode="In" Type="String" />
+            <Parameter Name="PostCreateDate" Mode="In" Type="DateTime" />
+            <Parameter Name="PostIsBlocked" Mode="In" Type="Boolean" />
+            <Parameter Name="PostIsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="PostKeyWords" Mode="In" Type="String" />
+            <Parameter Name="FKBlogID" Mode="In" Type="Int32" />
+            <Parameter Name="FKUserID" Mode="In" Type="Int32" />
+            <Parameter Name="IsCommentable" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="InsertUser">
+            <Parameter Name="UserID" Mode="InOut" Type="Int32" />
+            <Parameter Name="UserFirstName" Mode="In" Type="String" />
+            <Parameter Name="UserLastName" Mode="In" Type="String" />
+            <Parameter Name="UserNickName" Mode="In" Type="String" />
+            <Parameter Name="UserEmail" Mode="In" Type="String" />
+            <Parameter Name="UserPassword" Mode="In" Type="String" />
+            <Parameter Name="UserIsBlocked" Mode="In" Type="Boolean" />
+            <Parameter Name="UserPhoto" Mode="In" Type="String" />
+            <Parameter Name="FKRoleID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertUserRoles">
+            <Parameter Name="RoleID" Mode="InOut" Type="Int32" />
+            <Parameter Name="RoleName" Mode="In" Type="String" />
+            <Parameter Name="RoleIsAdmin" Mode="In" Type="Boolean" />
+            <Parameter Name="RoleIsActive" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="PostPublish">
+            <Parameter Name="PostID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SearchBlogContributers">
+            <Parameter Name="LoginUserID" Mode="In" Type="Int32" />
+            <Parameter Name="BlogID" Mode="In" Type="Int32" />
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="PageIndex" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="RowsCount" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SearchBlogs">
+            <Parameter Name="BlogTitle" Mode="In" Type="String" />
+            <Parameter Name="BlogDescription" Mode="In" Type="String" />
+            <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+            <Parameter Name="Block" Mode="In" Type="Boolean" />
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="PageIndex" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="IsStudent" Mode="In" Type="Int32" />
+            <Parameter Name="RowsCount" Mode="InOut" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="SearchComments">
+            <Parameter Name="CommentBody" Mode="In" Type="String" />
+            <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+            <Parameter Name="Block" Mode="In" Type="Boolean" />
+            <Parameter Name="PostID" Mode="In" Type="Int32" />
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="PageIndex" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="RowsCount" Mode="InOut" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="SearchPosts">
+            <Parameter Name="PostTitle" Mode="In" Type="String" />
+            <Parameter Name="PostBody" Mode="In" Type="String" />
+            <Parameter Name="PostKeyWords" Mode="In" Type="String" />
+            <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+            <Parameter Name="Block" Mode="In" Type="Boolean" />
+            <Parameter Name="BlogID" Mode="In" Type="Int32" />
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="PageIndex" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="RowsCount" Mode="InOut" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+            <Parameter Name="PostIsPublished" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="SearchUsers">
+            <Parameter Name="UserFirstName" Mode="In" Type="String" />
+            <Parameter Name="UserLastName" Mode="In" Type="String" />
+            <Parameter Name="UserNickName" Mode="In" Type="String" />
+            <Parameter Name="UserEmail" Mode="In" Type="String" />
+            <Parameter Name="UserIsBlocked" Mode="In" Type="Boolean" />
+            <Parameter Name="FKRoleID" Mode="In" Type="Int32" />
+            <Parameter Name="PageIndex" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="RowsCount" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(blogsModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(blogsModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="UpdateBlogContributers">
+            <Parameter Name="BlogID" Mode="In" Type="Int32" />
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateBlogs">
+            <Parameter Name="BlogID" Mode="In" Type="Int32" />
+            <Parameter Name="BlogTitle" Mode="In" Type="String" />
+            <Parameter Name="BlogDescription" Mode="In" Type="String" />
+            <Parameter Name="BlogCreateDate" Mode="In" Type="DateTime" />
+            <Parameter Name="BlogIsBlocked" Mode="In" Type="Boolean" />
+            <Parameter Name="BlogIsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="BlogHeaderPhoto" Mode="In" Type="String" />
+            <Parameter Name="FKUserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateComment">
+            <Parameter Name="CommentID" Mode="In" Type="Int32" />
+            <Parameter Name="CommentBody" Mode="In" Type="String" />
+            <Parameter Name="CommentCreateDate" Mode="In" Type="DateTime" />
+            <Parameter Name="CommentIsBlocked" Mode="In" Type="Boolean" />
+            <Parameter Name="CommentIsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="FKPostID" Mode="In" Type="Int32" />
+            <Parameter Name="FKUserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdatePosts">
+            <Parameter Name="PostID" Mode="In" Type="Int32" />
+            <Parameter Name="PostTitle" Mode="In" Type="String" />
+            <Parameter Name="PostBody" Mode="In" Type="String" />
+            <Parameter Name="PostCreateDate" Mode="In" Type="DateTime" />
+            <Parameter Name="PostIsBlocked" Mode="In" Type="Boolean" />
+            <Parameter Name="PostIsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="PostKeyWords" Mode="In" Type="String" />
+            <Parameter Name="FKBlogID" Mode="In" Type="Int32" />
+            <Parameter Name="FKUserID" Mode="In" Type="Int32" />
+            <Parameter Name="IsCommentable" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateUser">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="UserFirstName" Mode="In" Type="String" />
+            <Parameter Name="UserLastName" Mode="In" Type="String" />
+            <Parameter Name="UserNickName" Mode="In" Type="String" />
+            <Parameter Name="UserEmail" Mode="In" Type="String" />
+            <Parameter Name="UserPassword" Mode="In" Type="String" />
+            <Parameter Name="UserIsBlocked" Mode="In" Type="Boolean" />
+            <Parameter Name="UserPhoto" Mode="In" Type="String" />
+            <Parameter Name="FKRoleID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateUserRoles">
+            <Parameter Name="RoleID" Mode="In" Type="Int32" />
+            <Parameter Name="RoleName" Mode="In" Type="String" />
+            <Parameter Name="RoleIsAdmin" Mode="In" Type="Boolean" />
+            <Parameter Name="RoleIsActive" Mode="In" Type="Boolean" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetAllActiveBlogsByUserId_Result">
+          <Property Type="Int32" Name="BlogID" Nullable="false" />
+          <Property Type="String" Name="BlogTitle" Nullable="false" MaxLength="300" />
+          <Property Type="String" Name="BlogDescription" Nullable="true" MaxLength="2000" />
+          <Property Type="DateTime" Name="BlogCreateDate" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="BlogIsBlocked" Nullable="false" />
+          <Property Type="Boolean" Name="BlogIsActive" Nullable="false" />
+          <Property Type="String" Name="BlogHeaderPhoto" Nullable="true" MaxLength="300" />
+          <Property Type="Int32" Name="FKUserID" Nullable="false" />
+          <Property Type="String" Name="userName" Nullable="false" MaxLength="606" />
+        </ComplexType>
+        <ComplexType Name="GetAllActiveByRoleName_Result">
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="UserFirstName" Nullable="false" MaxLength="300" />
+          <Property Type="String" Name="UserLastName" Nullable="false" MaxLength="300" />
+          <Property Type="String" Name="UserNickName" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="UserEmail" Nullable="false" MaxLength="300" />
+          <Property Type="String" Name="UserPassword" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="UserIsBlocked" Nullable="false" />
+          <Property Type="String" Name="UserPhoto" Nullable="true" MaxLength="300" />
+          <Property Type="Int32" Name="FKRoleID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAllBlogContributers_Result">
+          <Property Type="Int32" Name="FKBlogID" Nullable="false" />
+          <Property Type="Int32" Name="FKUserID" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAllBlogs_Result">
+          <Property Type="Int32" Name="BlogID" Nullable="false" />
+          <Property Type="String" Name="BlogTitle" Nullable="false" MaxLength="300" />
+          <Property Type="String" Name="BlogDescription" Nullable="true" MaxLength="2000" />
+          <Property Type="DateTime" Name="BlogCreateDate" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="BlogIsBlocked" Nullable="false" />
+          <Property Type="Boolean" Name="BlogIsActive" Nullable="false" />
+          <Property Type="String" Name="BlogHeaderPhoto" Nullable="true" MaxLength="300" />
+          <Property Type="Int32" Name="FKUserID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAllComments_Result">
+          <Property Type="Int32" Name="CommentID" Nullable="false" />
+          <Property Type="String" Name="CommentBody" Nullable="false" MaxLength="2000" />
+          <Property Type="DateTime" Name="CommentCreateDate" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="CommentIsBlocked" Nullable="false" />
+          <Property Type="Boolean" Name="CommentIsActive" Nullable="false" />
+          <Property Type="Int32" Name="FKPostID" Nullable="false" />
+          <Property Type="Int32" Name="FKUserID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAllPosts_Result">
+          <Property Type="Int32" Name="PostID" Nullable="false" />
+          <Property Type="String" Name="PostTitle" Nullable="false" MaxLength="300" />
+          <Property Type="String" Name="PostBody" Nullable="false" />
+          <Property Type="DateTime" Name="PostCreateDate" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="PostIsBlocked" Nullable="false" />
+          <Property Type="Boolean" Name="PostIsActive" Nullable="false" />
+          <Property Type="String" Name="PostKeyWords" Nullable="true" MaxLength="2000" />
+          <Property Type="Boolean" Name="PostIsPublished" Nullable="false" />
+          <Property Type="Int32" Name="FKBlogID" Nullable="false" />
+          <Property Type="Int32" Name="FKUserID" Nullable="false" />
+          <Property Type="Boolean" Name="IsCommentable" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetAllUserRoles_Result">
+          <Property Type="Int32" Name="RoleID" Nullable="false" />
+          <Property Type="String" Name="RoleName" Nullable="false" MaxLength="300" />
+          <Property Type="Boolean" Name="RoleIsAdmin" Nullable="false" />
+          <Property Type="Boolean" Name="RoleIsActive" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAllUsers_Result">
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="UserFirstName" Nullable="false" MaxLength="300" />
+          <Property Type="String" Name="UserLastName" Nullable="false" MaxLength="300" />
+          <Property Type="String" Name="UserNickName" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="UserEmail" Nullable="false" MaxLength="300" />
+          <Property Type="String" Name="UserPassword" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="UserIsBlocked" Nullable="false" />
+          <Property Type="String" Name="UserPhoto" Nullable="true" MaxLength="300" />
+          <Property Type="Int32" Name="FKRoleID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetBlogByIdForUser_Result">
+          <Property Type="Int32" Name="BlogID" Nullable="false" />
+          <Property Type="String" Name="BlogTitle" Nullable="false" MaxLength="300" />
+          <Property Type="String" Name="BlogDescription" Nullable="true" MaxLength="2000" />
+          <Property Type="DateTime" Name="BlogCreateDate" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="BlogIsBlocked" Nullable="false" />
+          <Property Type="Boolean" Name="BlogIsActive" Nullable="false" />
+          <Property Type="String" Name="BlogHeaderPhoto" Nullable="true" MaxLength="300" />
+          <Property Type="Int32" Name="FKUserID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetBlogContributersByIds_Result">
+          <Property Type="Int32" Name="FKBlogID" Nullable="false" />
+          <Property Type="Int32" Name="FKUserID" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetBlogsById_Result">
+          <Property Type="Int32" Name="BlogID" Nullable="false" />
+          <Property Type="String" Name="BlogTitle" Nullable="false" MaxLength="300" />
+          <Property Type="String" Name="BlogDescription" Nullable="true" MaxLength="2000" />
+          <Property Type="DateTime" Name="BlogCreateDate" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="BlogIsBlocked" Nullable="false" />
+          <Property Type="Boolean" Name="BlogIsActive" Nullable="false" />
+          <Property Type="String" Name="BlogHeaderPhoto" Nullable="true" MaxLength="300" />
+          <Property Type="Int32" Name="FKUserID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetBlogWithRelatedPosts_Result">
+          <Property Type="Int32" Name="BlogID" Nullable="false" />
+          <Property Type="String" Name="BlogTitle" Nullable="false" MaxLength="300" />
+          <Property Type="String" Name="BlogDescription" Nullable="true" MaxLength="2000" />
+          <Property Type="DateTime" Name="BlogCreateDate" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="BlogIsBlocked" Nullable="false" />
+          <Property Type="Boolean" Name="BlogIsActive" Nullable="false" />
+          <Property Type="String" Name="BlogHeaderPhoto" Nullable="true" MaxLength="300" />
+          <Property Type="Int32" Name="FKUserID" Nullable="false" />
+          <Property Type="String" Name="userName" Nullable="false" MaxLength="601" />
+        </ComplexType>
+        <ComplexType Name="GetCommentsById_Result">
+          <Property Type="Int32" Name="CommentID" Nullable="false" />
+          <Property Type="String" Name="CommentBody" Nullable="false" MaxLength="2000" />
+          <Property Type="DateTime" Name="CommentCreateDate" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="CommentIsBlocked" Nullable="false" />
+          <Property Type="Boolean" Name="CommentIsActive" Nullable="false" />
+          <Property Type="Int32" Name="FKPostID" Nullable="false" />
+          <Property Type="Int32" Name="FKUserID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetPostsById_Result">
+          <Property Type="Int32" Name="PostID" Nullable="false" />
+          <Property Type="String" Name="PostTitle" Nullable="false" MaxLength="300" />
+          <Property Type="String" Name="PostBody" Nullable="false" />
+          <Property Type="DateTime" Name="PostCreateDate" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="PostIsBlocked" Nullable="false" />
+          <Property Type="Boolean" Name="PostIsActive" Nullable="false" />
+          <Property Type="String" Name="PostKeyWords" Nullable="true" MaxLength="2000" />
+          <Property Type="Boolean" Name="PostIsPublished" Nullable="false" />
+          <Property Type="Int32" Name="FKBlogID" Nullable="false" />
+          <Property Type="Int32" Name="FKUserID" Nullable="false" />
+          <Property Type="Boolean" Name="IsCommentable" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetPostWithRelatedData_Result">
+          <Property Type="Int32" Name="PostID" Nullable="false" />
+          <Property Type="String" Name="PostTitle" Nullable="false" MaxLength="300" />
+          <Property Type="String" Name="PostBody" Nullable="false" />
+          <Property Type="DateTime" Name="PostCreateDate" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="PostIsBlocked" Nullable="false" />
+          <Property Type="Boolean" Name="PostIsActive" Nullable="false" />
+          <Property Type="String" Name="PostKeyWords" Nullable="true" MaxLength="2000" />
+          <Property Type="Boolean" Name="PostIsPublished" Nullable="false" />
+          <Property Type="Int32" Name="FKBlogID" Nullable="false" />
+          <Property Type="Int32" Name="FKUserID" Nullable="false" />
+          <Property Type="Boolean" Name="IsCommentable" Nullable="true" />
+          <Property Type="String" Name="userName" Nullable="false" MaxLength="601" />
+          <Property Type="Boolean" Name="BlogIsBlocked" Nullable="false" />
+          <Property Type="Boolean" Name="BlogIsActive" Nullable="false" />
+          <Property Type="String" Name="BlogTitle" Nullable="false" MaxLength="300" />
+        </ComplexType>
+        <ComplexType Name="GetUserByEmailAndPassword_Result">
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="UserFirstName" Nullable="false" MaxLength="300" />
+          <Property Type="String" Name="UserLastName" Nullable="false" MaxLength="300" />
+          <Property Type="String" Name="UserNickName" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="UserEmail" Nullable="false" MaxLength="300" />
+          <Property Type="String" Name="UserPassword" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="UserIsBlocked" Nullable="false" />
+          <Property Type="String" Name="UserPhoto" Nullable="true" MaxLength="300" />
+          <Property Type="Int32" Name="FKRoleID" Nullable="false" />
+          <Property Type="String" Name="RoleName" Nullable="false" MaxLength="300" />
+          <Property Type="Boolean" Name="RoleIsAdmin" Nullable="false" />
+          <Property Type="Boolean" Name="RoleIsActive" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetUserRolesById_Result">
+          <Property Type="Int32" Name="RoleID" Nullable="false" />
+          <Property Type="String" Name="RoleName" Nullable="false" MaxLength="300" />
+          <Property Type="Boolean" Name="RoleIsAdmin" Nullable="false" />
+          <Property Type="Boolean" Name="RoleIsActive" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetUsersById_Result">
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="UserFirstName" Nullable="false" MaxLength="300" />
+          <Property Type="String" Name="UserLastName" Nullable="false" MaxLength="300" />
+          <Property Type="String" Name="UserNickName" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="UserEmail" Nullable="false" MaxLength="300" />
+          <Property Type="String" Name="UserPassword" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="UserIsBlocked" Nullable="false" />
+          <Property Type="String" Name="UserPhoto" Nullable="true" MaxLength="300" />
+          <Property Type="Int32" Name="FKRoleID" Nullable="false" />
+          <Property Type="String" Name="RoleName" Nullable="false" MaxLength="300" />
+          <Property Type="Boolean" Name="RoleIsAdmin" Nullable="false" />
+          <Property Type="Boolean" Name="RoleIsActive" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="blogsModelStoreContainer" CdmEntityContainer="BlogsEntities">
+          <EntitySetMapping Name="Blogs">
+            <EntityTypeMapping TypeName="blogsModel.Blog">
+              <MappingFragment StoreEntitySet="Blogs">
+                <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+                <ScalarProperty Name="BlogTitle" ColumnName="BlogTitle" />
+                <ScalarProperty Name="BlogDescription" ColumnName="BlogDescription" />
+                <ScalarProperty Name="BlogCreateDate" ColumnName="BlogCreateDate" />
+                <ScalarProperty Name="BlogIsBlocked" ColumnName="BlogIsBlocked" />
+                <ScalarProperty Name="BlogIsActive" ColumnName="BlogIsActive" />
+                <ScalarProperty Name="BlogHeaderPhoto" ColumnName="BlogHeaderPhoto" />
+                <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="blogsModel.Comment">
+              <MappingFragment StoreEntitySet="Comments">
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+                <ScalarProperty Name="CommentBody" ColumnName="CommentBody" />
+                <ScalarProperty Name="CommentCreateDate" ColumnName="CommentCreateDate" />
+                <ScalarProperty Name="CommentIsBlocked" ColumnName="CommentIsBlocked" />
+                <ScalarProperty Name="CommentIsActive" ColumnName="CommentIsActive" />
+                <ScalarProperty Name="FKPostID" ColumnName="FKPostID" />
+                <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="blogsModel.Post">
+              <MappingFragment StoreEntitySet="Posts">
+                <ScalarProperty Name="PostID" ColumnName="PostID" />
+                <ScalarProperty Name="PostTitle" ColumnName="PostTitle" />
+                <ScalarProperty Name="PostBody" ColumnName="PostBody" />
+                <ScalarProperty Name="PostCreateDate" ColumnName="PostCreateDate" />
+                <ScalarProperty Name="PostIsBlocked" ColumnName="PostIsBlocked" />
+                <ScalarProperty Name="PostIsActive" ColumnName="PostIsActive" />
+                <ScalarProperty Name="PostKeyWords" ColumnName="PostKeyWords" />
+                <ScalarProperty Name="PostIsPublished" ColumnName="PostIsPublished" />
+                <ScalarProperty Name="FKBlogID" ColumnName="FKBlogID" />
+                <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+                <ScalarProperty Name="IsCommentable" ColumnName="IsCommentable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="blogsModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="blogsModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRoles">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleIsAdmin" ColumnName="RoleIsAdmin" />
+                <ScalarProperty Name="RoleIsActive" ColumnName="RoleIsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="blogsModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserFirstName" ColumnName="UserFirstName" />
+                <ScalarProperty Name="UserLastName" ColumnName="UserLastName" />
+                <ScalarProperty Name="UserNickName" ColumnName="UserNickName" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="UserIsBlocked" ColumnName="UserIsBlocked" />
+                <ScalarProperty Name="UserPhoto" ColumnName="UserPhoto" />
+                <ScalarProperty Name="FKRoleID" ColumnName="FKRoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlogContributers">
+            <EntityTypeMapping TypeName="blogsModel.BlogContributer">
+              <MappingFragment StoreEntitySet="BlogContributers">
+                <ScalarProperty Name="FKBlogID" ColumnName="FKBlogID" />
+                <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ChangeBlogActivateStatus" FunctionName="blogsModel.Store.ChangeBlogActivateStatus" />
+          <FunctionImportMapping FunctionImportName="ChangeBlogBlockStatus" FunctionName="blogsModel.Store.ChangeBlogBlockStatus" />
+          <FunctionImportMapping FunctionImportName="ChangeCommentActivateStatus" FunctionName="blogsModel.Store.ChangeCommentActivateStatus" />
+          <FunctionImportMapping FunctionImportName="ChangeCommentBlockStatus" FunctionName="blogsModel.Store.ChangeCommentBlockStatus" />
+          <FunctionImportMapping FunctionImportName="ChangePostActivateStatus" FunctionName="blogsModel.Store.ChangePostActivateStatus" />
+          <FunctionImportMapping FunctionImportName="ChangePostBlockStatus" FunctionName="blogsModel.Store.ChangePostBlockStatus" />
+          <FunctionImportMapping FunctionImportName="ChangeUserStatus" FunctionName="blogsModel.Store.ChangeUserStatus" />
+          <FunctionImportMapping FunctionImportName="DeleteBlogContributersByIds" FunctionName="blogsModel.Store.DeleteBlogContributersByIds" />
+          <FunctionImportMapping FunctionImportName="DeleteBlogsById" FunctionName="blogsModel.Store.DeleteBlogsById" />
+          <FunctionImportMapping FunctionImportName="DeleteCommentsById" FunctionName="blogsModel.Store.DeleteCommentsById" />
+          <FunctionImportMapping FunctionImportName="DeletePostsById" FunctionName="blogsModel.Store.DeletePostsById" />
+          <FunctionImportMapping FunctionImportName="DeleteUserRolesById" FunctionName="blogsModel.Store.DeleteUserRolesById" />
+          <FunctionImportMapping FunctionImportName="DeleteUsersById" FunctionName="blogsModel.Store.DeleteUsersById" />
+          <FunctionImportMapping FunctionImportName="GetAllActiveBlogsByUserId" FunctionName="blogsModel.Store.GetAllActiveBlogsByUserId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="blogsModel.GetAllActiveBlogsByUserId_Result">
+                <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+                <ScalarProperty Name="BlogTitle" ColumnName="BlogTitle" />
+                <ScalarProperty Name="BlogDescription" ColumnName="BlogDescription" />
+                <ScalarProperty Name="BlogCreateDate" ColumnName="BlogCreateDate" />
+                <ScalarProperty Name="BlogIsBlocked" ColumnName="BlogIsBlocked" />
+                <ScalarProperty Name="BlogIsActive" ColumnName="BlogIsActive" />
+                <ScalarProperty Name="BlogHeaderPhoto" ColumnName="BlogHeaderPhoto" />
+                <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllActiveByRoleName" FunctionName="blogsModel.Store.GetAllActiveByRoleName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="blogsModel.GetAllActiveByRoleName_Result">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserFirstName" ColumnName="UserFirstName" />
+                <ScalarProperty Name="UserLastName" ColumnName="UserLastName" />
+                <ScalarProperty Name="UserNickName" ColumnName="UserNickName" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="UserIsBlocked" ColumnName="UserIsBlocked" />
+                <ScalarProperty Name="UserPhoto" ColumnName="UserPhoto" />
+                <ScalarProperty Name="FKRoleID" ColumnName="FKRoleID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllBlogContributers" FunctionName="blogsModel.Store.GetAllBlogContributers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="blogsModel.GetAllBlogContributers_Result">
+                <ScalarProperty Name="FKBlogID" ColumnName="FKBlogID" />
+                <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllBlogs" FunctionName="blogsModel.Store.GetAllBlogs">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="blogsModel.GetAllBlogs_Result">
+                <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+                <ScalarProperty Name="BlogTitle" ColumnName="BlogTitle" />
+                <ScalarProperty Name="BlogDescription" ColumnName="BlogDescription" />
+                <ScalarProperty Name="BlogCreateDate" ColumnName="BlogCreateDate" />
+                <ScalarProperty Name="BlogIsBlocked" ColumnName="BlogIsBlocked" />
+                <ScalarProperty Name="BlogIsActive" ColumnName="BlogIsActive" />
+                <ScalarProperty Name="BlogHeaderPhoto" ColumnName="BlogHeaderPhoto" />
+                <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllComments" FunctionName="blogsModel.Store.GetAllComments">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="blogsModel.GetAllComments_Result">
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+                <ScalarProperty Name="CommentBody" ColumnName="CommentBody" />
+                <ScalarProperty Name="CommentCreateDate" ColumnName="CommentCreateDate" />
+                <ScalarProperty Name="CommentIsBlocked" ColumnName="CommentIsBlocked" />
+                <ScalarProperty Name="CommentIsActive" ColumnName="CommentIsActive" />
+                <ScalarProperty Name="FKPostID" ColumnName="FKPostID" />
+                <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllPosts" FunctionName="blogsModel.Store.GetAllPosts">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="blogsModel.GetAllPosts_Result">
+                <ScalarProperty Name="PostID" ColumnName="PostID" />
+                <ScalarProperty Name="PostTitle" ColumnName="PostTitle" />
+                <ScalarProperty Name="PostBody" ColumnName="PostBody" />
+                <ScalarProperty Name="PostCreateDate" ColumnName="PostCreateDate" />
+                <ScalarProperty Name="PostIsBlocked" ColumnName="PostIsBlocked" />
+                <ScalarProperty Name="PostIsActive" ColumnName="PostIsActive" />
+                <ScalarProperty Name="PostKeyWords" ColumnName="PostKeyWords" />
+                <ScalarProperty Name="PostIsPublished" ColumnName="PostIsPublished" />
+                <ScalarProperty Name="FKBlogID" ColumnName="FKBlogID" />
+                <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+                <ScalarProperty Name="IsCommentable" ColumnName="IsCommentable" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllUserRoles" FunctionName="blogsModel.Store.GetAllUserRoles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="blogsModel.GetAllUserRoles_Result">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleIsAdmin" ColumnName="RoleIsAdmin" />
+                <ScalarProperty Name="RoleIsActive" ColumnName="RoleIsActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllUsers" FunctionName="blogsModel.Store.GetAllUsers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="blogsModel.GetAllUsers_Result">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserFirstName" ColumnName="UserFirstName" />
+                <ScalarProperty Name="UserLastName" ColumnName="UserLastName" />
+                <ScalarProperty Name="UserNickName" ColumnName="UserNickName" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="UserIsBlocked" ColumnName="UserIsBlocked" />
+                <ScalarProperty Name="UserPhoto" ColumnName="UserPhoto" />
+                <ScalarProperty Name="FKRoleID" ColumnName="FKRoleID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetBlogByIdForUser" FunctionName="blogsModel.Store.GetBlogByIdForUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="blogsModel.GetBlogByIdForUser_Result">
+                <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+                <ScalarProperty Name="BlogTitle" ColumnName="BlogTitle" />
+                <ScalarProperty Name="BlogDescription" ColumnName="BlogDescription" />
+                <ScalarProperty Name="BlogCreateDate" ColumnName="BlogCreateDate" />
+                <ScalarProperty Name="BlogIsBlocked" ColumnName="BlogIsBlocked" />
+                <ScalarProperty Name="BlogIsActive" ColumnName="BlogIsActive" />
+                <ScalarProperty Name="BlogHeaderPhoto" ColumnName="BlogHeaderPhoto" />
+                <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetBlogContributersByIds" FunctionName="blogsModel.Store.GetBlogContributersByIds">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="blogsModel.GetBlogContributersByIds_Result">
+                <ScalarProperty Name="FKBlogID" ColumnName="FKBlogID" />
+                <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetBlogsById" FunctionName="blogsModel.Store.GetBlogsById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="blogsModel.GetBlogsById_Result">
+                <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+                <ScalarProperty Name="BlogTitle" ColumnName="BlogTitle" />
+                <ScalarProperty Name="BlogDescription" ColumnName="BlogDescription" />
+                <ScalarProperty Name="BlogCreateDate" ColumnName="BlogCreateDate" />
+                <ScalarProperty Name="BlogIsBlocked" ColumnName="BlogIsBlocked" />
+                <ScalarProperty Name="BlogIsActive" ColumnName="BlogIsActive" />
+                <ScalarProperty Name="BlogHeaderPhoto" ColumnName="BlogHeaderPhoto" />
+                <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetBlogWithRelatedPosts" FunctionName="blogsModel.Store.GetBlogWithRelatedPosts">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="blogsModel.GetBlogWithRelatedPosts_Result">
+                <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+                <ScalarProperty Name="BlogTitle" ColumnName="BlogTitle" />
+                <ScalarProperty Name="BlogDescription" ColumnName="BlogDescription" />
+                <ScalarProperty Name="BlogCreateDate" ColumnName="BlogCreateDate" />
+                <ScalarProperty Name="BlogIsBlocked" ColumnName="BlogIsBlocked" />
+                <ScalarProperty Name="BlogIsActive" ColumnName="BlogIsActive" />
+                <ScalarProperty Name="BlogHeaderPhoto" ColumnName="BlogHeaderPhoto" />
+                <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCommentsById" FunctionName="blogsModel.Store.GetCommentsById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="blogsModel.GetCommentsById_Result">
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+                <ScalarProperty Name="CommentBody" ColumnName="CommentBody" />
+                <ScalarProperty Name="CommentCreateDate" ColumnName="CommentCreateDate" />
+                <ScalarProperty Name="CommentIsBlocked" ColumnName="CommentIsBlocked" />
+                <ScalarProperty Name="CommentIsActive" ColumnName="CommentIsActive" />
+                <ScalarProperty Name="FKPostID" ColumnName="FKPostID" />
+                <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetPostsById" FunctionName="blogsModel.Store.GetPostsById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="blogsModel.GetPostsById_Result">
+                <ScalarProperty Name="PostID" ColumnName="PostID" />
+                <ScalarProperty Name="PostTitle" ColumnName="PostTitle" />
+                <ScalarProperty Name="PostBody" ColumnName="PostBody" />
+                <ScalarProperty Name="PostCreateDate" ColumnName="PostCreateDate" />
+                <ScalarProperty Name="PostIsBlocked" ColumnName="PostIsBlocked" />
+                <ScalarProperty Name="PostIsActive" ColumnName="PostIsActive" />
+                <ScalarProperty Name="PostKeyWords" ColumnName="PostKeyWords" />
+                <ScalarProperty Name="PostIsPublished" ColumnName="PostIsPublished" />
+                <ScalarProperty Name="FKBlogID" ColumnName="FKBlogID" />
+                <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+                <ScalarProperty Name="IsCommentable" ColumnName="IsCommentable" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetPostWithRelatedData" FunctionName="blogsModel.Store.GetPostWithRelatedData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="blogsModel.GetPostWithRelatedData_Result">
+                <ScalarProperty Name="PostID" ColumnName="PostID" />
+                <ScalarProperty Name="PostTitle" ColumnName="PostTitle" />
+                <ScalarProperty Name="PostBody" ColumnName="PostBody" />
+                <ScalarProperty Name="PostCreateDate" ColumnName="PostCreateDate" />
+                <ScalarProperty Name="PostIsBlocked" ColumnName="PostIsBlocked" />
+                <ScalarProperty Name="PostIsActive" ColumnName="PostIsActive" />
+                <ScalarProperty Name="PostKeyWords" ColumnName="PostKeyWords" />
+                <ScalarProperty Name="PostIsPublished" ColumnName="PostIsPublished" />
+                <ScalarProperty Name="FKBlogID" ColumnName="FKBlogID" />
+                <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+                <ScalarProperty Name="IsCommentable" ColumnName="IsCommentable" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="BlogIsBlocked" ColumnName="BlogIsBlocked" />
+                <ScalarProperty Name="BlogIsActive" ColumnName="BlogIsActive" />
+                <ScalarProperty Name="BlogTitle" ColumnName="BlogTitle" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUserByEmailAndPassword" FunctionName="blogsModel.Store.GetUserByEmailAndPassword">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="blogsModel.GetUserByEmailAndPassword_Result">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserFirstName" ColumnName="UserFirstName" />
+                <ScalarProperty Name="UserLastName" ColumnName="UserLastName" />
+                <ScalarProperty Name="UserNickName" ColumnName="UserNickName" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="UserIsBlocked" ColumnName="UserIsBlocked" />
+                <ScalarProperty Name="UserPhoto" ColumnName="UserPhoto" />
+                <ScalarProperty Name="FKRoleID" ColumnName="FKRoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleIsAdmin" ColumnName="RoleIsAdmin" />
+                <ScalarProperty Name="RoleIsActive" ColumnName="RoleIsActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUserRolesById" FunctionName="blogsModel.Store.GetUserRolesById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="blogsModel.GetUserRolesById_Result">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleIsAdmin" ColumnName="RoleIsAdmin" />
+                <ScalarProperty Name="RoleIsActive" ColumnName="RoleIsActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUsersById" FunctionName="blogsModel.Store.GetUsersById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="blogsModel.GetUsersById_Result">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserFirstName" ColumnName="UserFirstName" />
+                <ScalarProperty Name="UserLastName" ColumnName="UserLastName" />
+                <ScalarProperty Name="UserNickName" ColumnName="UserNickName" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="UserIsBlocked" ColumnName="UserIsBlocked" />
+                <ScalarProperty Name="UserPhoto" ColumnName="UserPhoto" />
+                <ScalarProperty Name="FKRoleID" ColumnName="FKRoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleIsAdmin" ColumnName="RoleIsAdmin" />
+                <ScalarProperty Name="RoleIsActive" ColumnName="RoleIsActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertBlogContributers" FunctionName="blogsModel.Store.InsertBlogContributers" />
+          <FunctionImportMapping FunctionImportName="InsertBlogs" FunctionName="blogsModel.Store.InsertBlogs" />
+          <FunctionImportMapping FunctionImportName="InsertComment" FunctionName="blogsModel.Store.InsertComment" />
+          <FunctionImportMapping FunctionImportName="InsertPosts" FunctionName="blogsModel.Store.InsertPosts" />
+          <FunctionImportMapping FunctionImportName="InsertUser" FunctionName="blogsModel.Store.InsertUser" />
+          <FunctionImportMapping FunctionImportName="InsertUserRoles" FunctionName="blogsModel.Store.InsertUserRoles" />
+          <FunctionImportMapping FunctionImportName="PostPublish" FunctionName="blogsModel.Store.PostPublish" />
+          <FunctionImportMapping FunctionImportName="SearchBlogContributers" FunctionName="blogsModel.Store.SearchBlogContributers" />
+          <FunctionImportMapping FunctionImportName="SearchBlogs" FunctionName="blogsModel.Store.SearchBlogs" />
+          <FunctionImportMapping FunctionImportName="SearchComments" FunctionName="blogsModel.Store.SearchComments" />
+          <FunctionImportMapping FunctionImportName="SearchPosts" FunctionName="blogsModel.Store.SearchPosts" />
+          <FunctionImportMapping FunctionImportName="SearchUsers" FunctionName="blogsModel.Store.SearchUsers" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="blogsModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="blogsModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="blogsModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="blogsModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="blogsModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="blogsModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="blogsModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="blogsModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="blogsModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="UpdateBlogContributers" FunctionName="blogsModel.Store.UpdateBlogContributers" />
+          <FunctionImportMapping FunctionImportName="UpdateBlogs" FunctionName="blogsModel.Store.UpdateBlogs" />
+          <FunctionImportMapping FunctionImportName="UpdateComment" FunctionName="blogsModel.Store.UpdateComment" />
+          <FunctionImportMapping FunctionImportName="UpdatePosts" FunctionName="blogsModel.Store.UpdatePosts" />
+          <FunctionImportMapping FunctionImportName="UpdateUser" FunctionName="blogsModel.Store.UpdateUser" />
+          <FunctionImportMapping FunctionImportName="UpdateUserRoles" FunctionName="blogsModel.Store.UpdateUserRoles" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

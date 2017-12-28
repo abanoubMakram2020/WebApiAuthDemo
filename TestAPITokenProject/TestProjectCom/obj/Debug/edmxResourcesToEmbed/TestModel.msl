@@ -1,0 +1,406 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="blogsModelStoreContainer" CdmEntityContainer="BlogsEntities">
+    <EntitySetMapping Name="Blogs">
+      <EntityTypeMapping TypeName="blogsModel.Blog">
+        <MappingFragment StoreEntitySet="Blogs">
+          <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+          <ScalarProperty Name="BlogTitle" ColumnName="BlogTitle" />
+          <ScalarProperty Name="BlogDescription" ColumnName="BlogDescription" />
+          <ScalarProperty Name="BlogCreateDate" ColumnName="BlogCreateDate" />
+          <ScalarProperty Name="BlogIsBlocked" ColumnName="BlogIsBlocked" />
+          <ScalarProperty Name="BlogIsActive" ColumnName="BlogIsActive" />
+          <ScalarProperty Name="BlogHeaderPhoto" ColumnName="BlogHeaderPhoto" />
+          <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="blogsModel.Comment">
+        <MappingFragment StoreEntitySet="Comments">
+          <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+          <ScalarProperty Name="CommentBody" ColumnName="CommentBody" />
+          <ScalarProperty Name="CommentCreateDate" ColumnName="CommentCreateDate" />
+          <ScalarProperty Name="CommentIsBlocked" ColumnName="CommentIsBlocked" />
+          <ScalarProperty Name="CommentIsActive" ColumnName="CommentIsActive" />
+          <ScalarProperty Name="FKPostID" ColumnName="FKPostID" />
+          <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Posts">
+      <EntityTypeMapping TypeName="blogsModel.Post">
+        <MappingFragment StoreEntitySet="Posts">
+          <ScalarProperty Name="PostID" ColumnName="PostID" />
+          <ScalarProperty Name="PostTitle" ColumnName="PostTitle" />
+          <ScalarProperty Name="PostBody" ColumnName="PostBody" />
+          <ScalarProperty Name="PostCreateDate" ColumnName="PostCreateDate" />
+          <ScalarProperty Name="PostIsBlocked" ColumnName="PostIsBlocked" />
+          <ScalarProperty Name="PostIsActive" ColumnName="PostIsActive" />
+          <ScalarProperty Name="PostKeyWords" ColumnName="PostKeyWords" />
+          <ScalarProperty Name="PostIsPublished" ColumnName="PostIsPublished" />
+          <ScalarProperty Name="FKBlogID" ColumnName="FKBlogID" />
+          <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+          <ScalarProperty Name="IsCommentable" ColumnName="IsCommentable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="blogsModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRoles">
+      <EntityTypeMapping TypeName="blogsModel.UserRole">
+        <MappingFragment StoreEntitySet="UserRoles">
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="RoleIsAdmin" ColumnName="RoleIsAdmin" />
+          <ScalarProperty Name="RoleIsActive" ColumnName="RoleIsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="blogsModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserFirstName" ColumnName="UserFirstName" />
+          <ScalarProperty Name="UserLastName" ColumnName="UserLastName" />
+          <ScalarProperty Name="UserNickName" ColumnName="UserNickName" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+          <ScalarProperty Name="UserIsBlocked" ColumnName="UserIsBlocked" />
+          <ScalarProperty Name="UserPhoto" ColumnName="UserPhoto" />
+          <ScalarProperty Name="FKRoleID" ColumnName="FKRoleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BlogContributers">
+      <EntityTypeMapping TypeName="blogsModel.BlogContributer">
+        <MappingFragment StoreEntitySet="BlogContributers">
+          <ScalarProperty Name="FKBlogID" ColumnName="FKBlogID" />
+          <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ChangeBlogActivateStatus" FunctionName="blogsModel.Store.ChangeBlogActivateStatus" />
+    <FunctionImportMapping FunctionImportName="ChangeBlogBlockStatus" FunctionName="blogsModel.Store.ChangeBlogBlockStatus" />
+    <FunctionImportMapping FunctionImportName="ChangeCommentActivateStatus" FunctionName="blogsModel.Store.ChangeCommentActivateStatus" />
+    <FunctionImportMapping FunctionImportName="ChangeCommentBlockStatus" FunctionName="blogsModel.Store.ChangeCommentBlockStatus" />
+    <FunctionImportMapping FunctionImportName="ChangePostActivateStatus" FunctionName="blogsModel.Store.ChangePostActivateStatus" />
+    <FunctionImportMapping FunctionImportName="ChangePostBlockStatus" FunctionName="blogsModel.Store.ChangePostBlockStatus" />
+    <FunctionImportMapping FunctionImportName="ChangeUserStatus" FunctionName="blogsModel.Store.ChangeUserStatus" />
+    <FunctionImportMapping FunctionImportName="DeleteBlogContributersByIds" FunctionName="blogsModel.Store.DeleteBlogContributersByIds" />
+    <FunctionImportMapping FunctionImportName="DeleteBlogsById" FunctionName="blogsModel.Store.DeleteBlogsById" />
+    <FunctionImportMapping FunctionImportName="DeleteCommentsById" FunctionName="blogsModel.Store.DeleteCommentsById" />
+    <FunctionImportMapping FunctionImportName="DeletePostsById" FunctionName="blogsModel.Store.DeletePostsById" />
+    <FunctionImportMapping FunctionImportName="DeleteUserRolesById" FunctionName="blogsModel.Store.DeleteUserRolesById" />
+    <FunctionImportMapping FunctionImportName="DeleteUsersById" FunctionName="blogsModel.Store.DeleteUsersById" />
+    <FunctionImportMapping FunctionImportName="GetAllActiveBlogsByUserId" FunctionName="blogsModel.Store.GetAllActiveBlogsByUserId">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="blogsModel.GetAllActiveBlogsByUserId_Result">
+          <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+          <ScalarProperty Name="BlogTitle" ColumnName="BlogTitle" />
+          <ScalarProperty Name="BlogDescription" ColumnName="BlogDescription" />
+          <ScalarProperty Name="BlogCreateDate" ColumnName="BlogCreateDate" />
+          <ScalarProperty Name="BlogIsBlocked" ColumnName="BlogIsBlocked" />
+          <ScalarProperty Name="BlogIsActive" ColumnName="BlogIsActive" />
+          <ScalarProperty Name="BlogHeaderPhoto" ColumnName="BlogHeaderPhoto" />
+          <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetAllActiveByRoleName" FunctionName="blogsModel.Store.GetAllActiveByRoleName">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="blogsModel.GetAllActiveByRoleName_Result">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserFirstName" ColumnName="UserFirstName" />
+          <ScalarProperty Name="UserLastName" ColumnName="UserLastName" />
+          <ScalarProperty Name="UserNickName" ColumnName="UserNickName" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+          <ScalarProperty Name="UserIsBlocked" ColumnName="UserIsBlocked" />
+          <ScalarProperty Name="UserPhoto" ColumnName="UserPhoto" />
+          <ScalarProperty Name="FKRoleID" ColumnName="FKRoleID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetAllBlogContributers" FunctionName="blogsModel.Store.GetAllBlogContributers">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="blogsModel.GetAllBlogContributers_Result">
+          <ScalarProperty Name="FKBlogID" ColumnName="FKBlogID" />
+          <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetAllBlogs" FunctionName="blogsModel.Store.GetAllBlogs">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="blogsModel.GetAllBlogs_Result">
+          <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+          <ScalarProperty Name="BlogTitle" ColumnName="BlogTitle" />
+          <ScalarProperty Name="BlogDescription" ColumnName="BlogDescription" />
+          <ScalarProperty Name="BlogCreateDate" ColumnName="BlogCreateDate" />
+          <ScalarProperty Name="BlogIsBlocked" ColumnName="BlogIsBlocked" />
+          <ScalarProperty Name="BlogIsActive" ColumnName="BlogIsActive" />
+          <ScalarProperty Name="BlogHeaderPhoto" ColumnName="BlogHeaderPhoto" />
+          <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetAllComments" FunctionName="blogsModel.Store.GetAllComments">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="blogsModel.GetAllComments_Result">
+          <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+          <ScalarProperty Name="CommentBody" ColumnName="CommentBody" />
+          <ScalarProperty Name="CommentCreateDate" ColumnName="CommentCreateDate" />
+          <ScalarProperty Name="CommentIsBlocked" ColumnName="CommentIsBlocked" />
+          <ScalarProperty Name="CommentIsActive" ColumnName="CommentIsActive" />
+          <ScalarProperty Name="FKPostID" ColumnName="FKPostID" />
+          <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetAllPosts" FunctionName="blogsModel.Store.GetAllPosts">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="blogsModel.GetAllPosts_Result">
+          <ScalarProperty Name="PostID" ColumnName="PostID" />
+          <ScalarProperty Name="PostTitle" ColumnName="PostTitle" />
+          <ScalarProperty Name="PostBody" ColumnName="PostBody" />
+          <ScalarProperty Name="PostCreateDate" ColumnName="PostCreateDate" />
+          <ScalarProperty Name="PostIsBlocked" ColumnName="PostIsBlocked" />
+          <ScalarProperty Name="PostIsActive" ColumnName="PostIsActive" />
+          <ScalarProperty Name="PostKeyWords" ColumnName="PostKeyWords" />
+          <ScalarProperty Name="PostIsPublished" ColumnName="PostIsPublished" />
+          <ScalarProperty Name="FKBlogID" ColumnName="FKBlogID" />
+          <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+          <ScalarProperty Name="IsCommentable" ColumnName="IsCommentable" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetAllUserRoles" FunctionName="blogsModel.Store.GetAllUserRoles">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="blogsModel.GetAllUserRoles_Result">
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="RoleIsAdmin" ColumnName="RoleIsAdmin" />
+          <ScalarProperty Name="RoleIsActive" ColumnName="RoleIsActive" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetAllUsers" FunctionName="blogsModel.Store.GetAllUsers">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="blogsModel.GetAllUsers_Result">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserFirstName" ColumnName="UserFirstName" />
+          <ScalarProperty Name="UserLastName" ColumnName="UserLastName" />
+          <ScalarProperty Name="UserNickName" ColumnName="UserNickName" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+          <ScalarProperty Name="UserIsBlocked" ColumnName="UserIsBlocked" />
+          <ScalarProperty Name="UserPhoto" ColumnName="UserPhoto" />
+          <ScalarProperty Name="FKRoleID" ColumnName="FKRoleID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetBlogByIdForUser" FunctionName="blogsModel.Store.GetBlogByIdForUser">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="blogsModel.GetBlogByIdForUser_Result">
+          <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+          <ScalarProperty Name="BlogTitle" ColumnName="BlogTitle" />
+          <ScalarProperty Name="BlogDescription" ColumnName="BlogDescription" />
+          <ScalarProperty Name="BlogCreateDate" ColumnName="BlogCreateDate" />
+          <ScalarProperty Name="BlogIsBlocked" ColumnName="BlogIsBlocked" />
+          <ScalarProperty Name="BlogIsActive" ColumnName="BlogIsActive" />
+          <ScalarProperty Name="BlogHeaderPhoto" ColumnName="BlogHeaderPhoto" />
+          <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetBlogContributersByIds" FunctionName="blogsModel.Store.GetBlogContributersByIds">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="blogsModel.GetBlogContributersByIds_Result">
+          <ScalarProperty Name="FKBlogID" ColumnName="FKBlogID" />
+          <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetBlogsById" FunctionName="blogsModel.Store.GetBlogsById">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="blogsModel.GetBlogsById_Result">
+          <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+          <ScalarProperty Name="BlogTitle" ColumnName="BlogTitle" />
+          <ScalarProperty Name="BlogDescription" ColumnName="BlogDescription" />
+          <ScalarProperty Name="BlogCreateDate" ColumnName="BlogCreateDate" />
+          <ScalarProperty Name="BlogIsBlocked" ColumnName="BlogIsBlocked" />
+          <ScalarProperty Name="BlogIsActive" ColumnName="BlogIsActive" />
+          <ScalarProperty Name="BlogHeaderPhoto" ColumnName="BlogHeaderPhoto" />
+          <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetBlogWithRelatedPosts" FunctionName="blogsModel.Store.GetBlogWithRelatedPosts">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="blogsModel.GetBlogWithRelatedPosts_Result">
+          <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+          <ScalarProperty Name="BlogTitle" ColumnName="BlogTitle" />
+          <ScalarProperty Name="BlogDescription" ColumnName="BlogDescription" />
+          <ScalarProperty Name="BlogCreateDate" ColumnName="BlogCreateDate" />
+          <ScalarProperty Name="BlogIsBlocked" ColumnName="BlogIsBlocked" />
+          <ScalarProperty Name="BlogIsActive" ColumnName="BlogIsActive" />
+          <ScalarProperty Name="BlogHeaderPhoto" ColumnName="BlogHeaderPhoto" />
+          <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetCommentsById" FunctionName="blogsModel.Store.GetCommentsById">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="blogsModel.GetCommentsById_Result">
+          <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+          <ScalarProperty Name="CommentBody" ColumnName="CommentBody" />
+          <ScalarProperty Name="CommentCreateDate" ColumnName="CommentCreateDate" />
+          <ScalarProperty Name="CommentIsBlocked" ColumnName="CommentIsBlocked" />
+          <ScalarProperty Name="CommentIsActive" ColumnName="CommentIsActive" />
+          <ScalarProperty Name="FKPostID" ColumnName="FKPostID" />
+          <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetPostsById" FunctionName="blogsModel.Store.GetPostsById">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="blogsModel.GetPostsById_Result">
+          <ScalarProperty Name="PostID" ColumnName="PostID" />
+          <ScalarProperty Name="PostTitle" ColumnName="PostTitle" />
+          <ScalarProperty Name="PostBody" ColumnName="PostBody" />
+          <ScalarProperty Name="PostCreateDate" ColumnName="PostCreateDate" />
+          <ScalarProperty Name="PostIsBlocked" ColumnName="PostIsBlocked" />
+          <ScalarProperty Name="PostIsActive" ColumnName="PostIsActive" />
+          <ScalarProperty Name="PostKeyWords" ColumnName="PostKeyWords" />
+          <ScalarProperty Name="PostIsPublished" ColumnName="PostIsPublished" />
+          <ScalarProperty Name="FKBlogID" ColumnName="FKBlogID" />
+          <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+          <ScalarProperty Name="IsCommentable" ColumnName="IsCommentable" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetPostWithRelatedData" FunctionName="blogsModel.Store.GetPostWithRelatedData">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="blogsModel.GetPostWithRelatedData_Result">
+          <ScalarProperty Name="PostID" ColumnName="PostID" />
+          <ScalarProperty Name="PostTitle" ColumnName="PostTitle" />
+          <ScalarProperty Name="PostBody" ColumnName="PostBody" />
+          <ScalarProperty Name="PostCreateDate" ColumnName="PostCreateDate" />
+          <ScalarProperty Name="PostIsBlocked" ColumnName="PostIsBlocked" />
+          <ScalarProperty Name="PostIsActive" ColumnName="PostIsActive" />
+          <ScalarProperty Name="PostKeyWords" ColumnName="PostKeyWords" />
+          <ScalarProperty Name="PostIsPublished" ColumnName="PostIsPublished" />
+          <ScalarProperty Name="FKBlogID" ColumnName="FKBlogID" />
+          <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+          <ScalarProperty Name="IsCommentable" ColumnName="IsCommentable" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="BlogIsBlocked" ColumnName="BlogIsBlocked" />
+          <ScalarProperty Name="BlogIsActive" ColumnName="BlogIsActive" />
+          <ScalarProperty Name="BlogTitle" ColumnName="BlogTitle" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetUserByEmailAndPassword" FunctionName="blogsModel.Store.GetUserByEmailAndPassword">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="blogsModel.GetUserByEmailAndPassword_Result">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserFirstName" ColumnName="UserFirstName" />
+          <ScalarProperty Name="UserLastName" ColumnName="UserLastName" />
+          <ScalarProperty Name="UserNickName" ColumnName="UserNickName" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+          <ScalarProperty Name="UserIsBlocked" ColumnName="UserIsBlocked" />
+          <ScalarProperty Name="UserPhoto" ColumnName="UserPhoto" />
+          <ScalarProperty Name="FKRoleID" ColumnName="FKRoleID" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="RoleIsAdmin" ColumnName="RoleIsAdmin" />
+          <ScalarProperty Name="RoleIsActive" ColumnName="RoleIsActive" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetUserRolesById" FunctionName="blogsModel.Store.GetUserRolesById">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="blogsModel.GetUserRolesById_Result">
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="RoleIsAdmin" ColumnName="RoleIsAdmin" />
+          <ScalarProperty Name="RoleIsActive" ColumnName="RoleIsActive" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetUsersById" FunctionName="blogsModel.Store.GetUsersById">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="blogsModel.GetUsersById_Result">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserFirstName" ColumnName="UserFirstName" />
+          <ScalarProperty Name="UserLastName" ColumnName="UserLastName" />
+          <ScalarProperty Name="UserNickName" ColumnName="UserNickName" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+          <ScalarProperty Name="UserIsBlocked" ColumnName="UserIsBlocked" />
+          <ScalarProperty Name="UserPhoto" ColumnName="UserPhoto" />
+          <ScalarProperty Name="FKRoleID" ColumnName="FKRoleID" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="RoleIsAdmin" ColumnName="RoleIsAdmin" />
+          <ScalarProperty Name="RoleIsActive" ColumnName="RoleIsActive" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertBlogContributers" FunctionName="blogsModel.Store.InsertBlogContributers" />
+    <FunctionImportMapping FunctionImportName="InsertBlogs" FunctionName="blogsModel.Store.InsertBlogs" />
+    <FunctionImportMapping FunctionImportName="InsertComment" FunctionName="blogsModel.Store.InsertComment" />
+    <FunctionImportMapping FunctionImportName="InsertPosts" FunctionName="blogsModel.Store.InsertPosts" />
+    <FunctionImportMapping FunctionImportName="InsertUser" FunctionName="blogsModel.Store.InsertUser" />
+    <FunctionImportMapping FunctionImportName="InsertUserRoles" FunctionName="blogsModel.Store.InsertUserRoles" />
+    <FunctionImportMapping FunctionImportName="PostPublish" FunctionName="blogsModel.Store.PostPublish" />
+    <FunctionImportMapping FunctionImportName="SearchBlogContributers" FunctionName="blogsModel.Store.SearchBlogContributers" />
+    <FunctionImportMapping FunctionImportName="SearchBlogs" FunctionName="blogsModel.Store.SearchBlogs" />
+    <FunctionImportMapping FunctionImportName="SearchComments" FunctionName="blogsModel.Store.SearchComments" />
+    <FunctionImportMapping FunctionImportName="SearchPosts" FunctionName="blogsModel.Store.SearchPosts" />
+    <FunctionImportMapping FunctionImportName="SearchUsers" FunctionName="blogsModel.Store.SearchUsers" />
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="blogsModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="blogsModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="blogsModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="blogsModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="blogsModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="blogsModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="blogsModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="blogsModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="blogsModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="UpdateBlogContributers" FunctionName="blogsModel.Store.UpdateBlogContributers" />
+    <FunctionImportMapping FunctionImportName="UpdateBlogs" FunctionName="blogsModel.Store.UpdateBlogs" />
+    <FunctionImportMapping FunctionImportName="UpdateComment" FunctionName="blogsModel.Store.UpdateComment" />
+    <FunctionImportMapping FunctionImportName="UpdatePosts" FunctionName="blogsModel.Store.UpdatePosts" />
+    <FunctionImportMapping FunctionImportName="UpdateUser" FunctionName="blogsModel.Store.UpdateUser" />
+    <FunctionImportMapping FunctionImportName="UpdateUserRoles" FunctionName="blogsModel.Store.UpdateUserRoles" />
+  </EntityContainerMapping>
+</Mapping>
