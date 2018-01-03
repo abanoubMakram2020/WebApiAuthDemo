@@ -20,6 +20,8 @@ namespace TestAPITokenProject.Models
         public string UserPhoto { get; set; }
         public int FKRoleID { get; set; }
 
+        public string RoleName { get; set; }
+
         public void oMappForEntity(User oUser )
         {
             this.UserID        = oUser.UserID;
@@ -31,7 +33,7 @@ namespace TestAPITokenProject.Models
             this.UserPhoto     = oUser.UserPhoto;
             this.UserIsBlocked = oUser.UserIsBlocked;
             this.FKRoleID      = oUser.FKRoleID;
-
+            this.RoleName      = oUser.UserRole.RoleName;
         }
 
         public List<Test> lMappListOfEntity(List<User> lUser)
@@ -51,7 +53,8 @@ namespace TestAPITokenProject.Models
                     UserEmail     = item.UserEmail,
                     UserPhoto     = item.UserPhoto,
                     UserIsBlocked = item.UserIsBlocked,
-                    FKRoleID      = item.FKRoleID
+                    FKRoleID      = item.FKRoleID,
+                    RoleName      = item.UserRole.RoleName
                 });
             }
             return lTest;

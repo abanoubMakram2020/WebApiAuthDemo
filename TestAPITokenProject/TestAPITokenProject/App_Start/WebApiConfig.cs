@@ -35,9 +35,9 @@ namespace TestAPITokenProject
 
 
             //solve the Access-Control-Allow-Origin error resolution
-            var cors = new EnableCorsAttribute("*", "*", "*");
-            config.EnableCors(cors);
-
+            //var cors = new EnableCorsAttribute("*", "*", "*");
+            //config.EnableCors(cors);
+            config.EnableCors();
             // Web API routes
             //config.MapHttpAttributeRoutes();
 

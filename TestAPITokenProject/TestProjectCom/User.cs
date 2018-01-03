@@ -31,7 +31,7 @@ namespace TestProjectCom
         public bool UserIsBlocked { get; set; }
         public string UserPhoto { get; set; }
         public int FKRoleID { get; set; }
-    
+
         public virtual ICollection<Blog> Blogs { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Post> Posts { get; set; }

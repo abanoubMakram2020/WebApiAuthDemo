@@ -13,9 +13,9 @@ namespace TestAPITokenProject.Controllers
         [AllowAnonymous]
         [HttpGet]
       
-        public IHttpActionResult GetTime()
+        public string GetTime()
         {
-            return Ok("Now server time is: " + DateTime.Now.ToString());
+            return "Now server time is: " + DateTime.Now.ToString();
         }
 
         [Authorize]
