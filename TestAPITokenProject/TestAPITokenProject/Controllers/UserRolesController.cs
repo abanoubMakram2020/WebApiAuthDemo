@@ -4,15 +4,24 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
+using TestAPITokenProject.Models;
+using TestProjectCom;
 
 namespace TestAPITokenProject.Controllers
 {
     public class UserRolesController : ApiController
     {
-        // GET: api/UserRoles
-        public IEnumerable<string> Get()
+        BlogsEntities dbContext = new BlogsEntities();
+
+        [Authorize]
+        [HttpGet]
+        //[EnableCors(origins: "http://localhost:4200", headers: null, methods: null)]
+        public List<UserRoles> GetAllUserRoles()
         {
-            return new string[] { "value1", "value2" };
+            UserRoles oUserRoles = new UserRoles();
+
+            return oUserRoles.lMappListOfEntity(dbContext.UserRoles.ToList());
         }
 
         // GET: api/UserRoles/5

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Arezk\Desktop\sample project\TestAPITokenProject\TestProjectCom\TestModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\mhegab\Source\Repos\WebApiAuthDemo\TestAPITokenProject\TestProjectCom\TestModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

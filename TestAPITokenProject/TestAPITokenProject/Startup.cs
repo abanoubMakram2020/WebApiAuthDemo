@@ -37,7 +37,7 @@ namespace TestAPITokenProject
             {
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/token"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
+                AccessTokenExpireTimeSpan = new TimeSpan(0,20,00), // TimeSpan.FromDays(0.011123456),//TimeSpan.FromDays(1), 16 minute
                 Provider = myProvider,
                 RefreshTokenProvider = new RefreshTokenProvider(),
             };
