@@ -16,7 +16,6 @@ namespace TestAPITokenProject.Controllers
 
         [Authorize]
         [HttpGet]
-        //[EnableCors(origins: "http://localhost:4200", headers: null, methods: null)]
         public List<UserRoles> GetAllUserRoles()
         {
             UserRoles oUserRoles = new UserRoles();

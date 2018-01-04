@@ -16,10 +16,8 @@ namespace TestAPITokenProject.Controllers
     {
         BlogsEntities dbContext = new BlogsEntities();
 
-
         [Authorize]
         [HttpGet]
-        ///[EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public List<Test> GetAllUsers()
         {
             Test oTest = new Test();
@@ -29,7 +27,6 @@ namespace TestAPITokenProject.Controllers
 
         [Authorize]
         [HttpGet]
-        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public Test GetByID(int nId)
         {
             Test oTest = new Test();
@@ -40,7 +37,6 @@ namespace TestAPITokenProject.Controllers
 
         [Authorize]
         [HttpPost]
-        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public int addUser([FromBody]User oUser)
         {
             try
@@ -77,7 +73,6 @@ namespace TestAPITokenProject.Controllers
 
         [Authorize]
         [HttpPut]
-        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public int editUser(int nId, [FromBody]User oUser)
         {
             try
@@ -127,7 +122,6 @@ namespace TestAPITokenProject.Controllers
         // DELETE: api/Users/5
         [Authorize]
         [HttpDelete]
-        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public int Delete(int nId)
         {
             try

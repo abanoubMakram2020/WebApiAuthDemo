@@ -7,6 +7,7 @@ using System.Web.Http;
 using Microsoft.Owin.Security.Infrastructure;
 using System.Collections.Concurrent;
 using Microsoft.Owin.Security;
+using System.Web.Http.Cors;
 
 [assembly: OwinStartup(typeof(TestAPITokenProject.Startup))]
 
@@ -14,6 +15,7 @@ namespace TestAPITokenProject
 {
     public class Startup
     {
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public void Configuration(IAppBuilder app)
         {
             // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=316888
@@ -30,6 +32,7 @@ namespace TestAPITokenProject
            
         }
 
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public void ConfigureOAuth(IAppBuilder app)
         {
             var myProvider = new MyAuthorizationServerProvider();

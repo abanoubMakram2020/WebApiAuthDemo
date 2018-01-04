@@ -5,13 +5,13 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Http.Cors;
 using TestProjectCom;
 
 namespace TestAPITokenProject
 {
     public class MyAuthorizationServerProvider : OAuthAuthorizationServerProvider
     {
-
         public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
             string sGrantType = context.Parameters["grant_type"];
