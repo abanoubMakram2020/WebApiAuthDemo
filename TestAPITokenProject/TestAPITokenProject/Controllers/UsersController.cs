@@ -33,7 +33,7 @@ namespace TestAPITokenProject.Controllers
             oTest.oMappForEntity(dbContext.Users.Where(i => i.UserID == nId).FirstOrDefault());
             return oTest;
             //  return dbContext.Users.Where(i => i.UserID == nId).FirstOrDefault();
-        }
+        }//
 
         [Authorize]
         [HttpPost]
