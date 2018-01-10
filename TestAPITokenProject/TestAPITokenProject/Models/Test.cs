@@ -22,6 +22,11 @@ namespace TestAPITokenProject.Models
 
         public string RoleName { get; set; }
 
+        public DateTime? CreateDate { get; set; }
+        public int? CityId { get; set; }
+
+        public int? CountryId { get; set; }
+
         public void oMappForEntity(User oUser )
         {
             this.UserID        = oUser.UserID;
@@ -34,6 +39,10 @@ namespace TestAPITokenProject.Models
             this.UserIsBlocked = oUser.UserIsBlocked;
             this.FKRoleID      = oUser.FKRoleID;
             this.RoleName      = oUser.UserRole.RoleName;
+
+            this.CreateDate    = oUser.CreateDate;
+            this.CityId = oUser.CityId;
+            this.CountryId = oUser.City == null ? 0 : oUser.City.CountryId;
         }
 
         public List<Test> lMappListOfEntity(List<User> lUser)
@@ -47,14 +56,18 @@ namespace TestAPITokenProject.Models
                 {
                     UserID = item.UserID,
                     UserFirstName = item.UserFirstName,
-                    UserLastName  = item.UserLastName,
-                    UserNickName  = item.UserNickName,
-                    UserPassword  = item.UserPassword,
-                    UserEmail     = item.UserEmail,
-                    UserPhoto     = item.UserPhoto,
+                    UserLastName = item.UserLastName,
+                    UserNickName = item.UserNickName,
+                    UserPassword = item.UserPassword,
+                    UserEmail = item.UserEmail,
+                    UserPhoto = item.UserPhoto,
                     UserIsBlocked = item.UserIsBlocked,
-                    FKRoleID      = item.FKRoleID,
-                    RoleName      = item.UserRole.RoleName
+                    FKRoleID = item.FKRoleID,
+                    RoleName = item.UserRole.RoleName,
+
+                    CreateDate = item.CreateDate,
+                    CityId = item.CityId,
+                    CountryId = item.City == null ? 0 : item.City.CountryId
                 });
             }
             return lTest;

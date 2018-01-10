@@ -25,6 +25,14 @@ warning 6002: The table/view 'Blogs.dbo.BlogContributers' does not have a primar
     <Property Name="BlogHeaderPhoto" Type="nvarchar" MaxLength="300" />
     <Property Name="FKUserID" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CountryId" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Comments">
     <Key>
       <PropertyRef Name="CommentID" />
@@ -85,6 +93,8 @@ warning 6002: The table/view 'Blogs.dbo.BlogContributers' does not have a primar
     <Property Name="UserIsBlocked" Type="bit" Nullable="false" />
     <Property Name="UserPhoto" Type="nvarchar" MaxLength="300" />
     <Property Name="FKRoleID" Type="int" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CityId" Type="int" />
   </EntityType>
   <Association Name="FK_BlogContributers_Blogs">
     <End Role="Blogs" Type="Self.Blogs" Multiplicity="1" />
@@ -167,6 +177,18 @@ warning 6002: The table/view 'Blogs.dbo.BlogContributers' does not have a primar
       </Principal>
       <Dependent Role="Posts">
         <PropertyRef Name="FKUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_City">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="CityId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -482,6 +504,7 @@ warning 6002: The table/view 'Blogs.dbo.BlogContributers' does not have a primar
   </Function>
   <EntityContainer Name="blogsModelStoreContainer">
     <EntitySet Name="Blogs" EntityType="Self.Blogs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -521,6 +544,10 @@ FROM [dbo].[BlogContributers] AS [BlogContributers]</DefiningQuery>
     <AssociationSet Name="FK_Posts_Users" Association="Self.FK_Posts_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="Posts" EntitySet="Posts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_City" Association="Self.FK_Users_City">
+      <End Role="City" EntitySet="City" />
+      <End Role="Users" EntitySet="Users" />
     </AssociationSet>
     <AssociationSet Name="FK_Users_UserRoles" Association="Self.FK_Users_UserRoles">
       <End Role="UserRoles" EntitySet="UserRoles" />

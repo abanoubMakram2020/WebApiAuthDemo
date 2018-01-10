@@ -87,6 +87,9 @@
     <NavigationProperty Name="Posts" Relationship="Self.FK_Posts_Users" FromRole="Users" ToRole="Posts" />
     <NavigationProperty Name="UserRole" Relationship="Self.FK_Users_UserRoles" FromRole="Users" ToRole="UserRoles" />
     <NavigationProperty Name="BlogContributers" Relationship="Self.FK_BlogContributers_Users" FromRole="Users" ToRole="BlogContributers" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CityId" Type="Int32" />
+    <NavigationProperty Name="City" Relationship="blogsModel.FK_Users_City" FromRole="User" ToRole="City" />
   </EntityType>
   <EntityType Name="BlogContributer">
     <Key>
@@ -533,6 +536,11 @@
       <Parameter Name="RoleIsAdmin" Mode="In" Type="Boolean" />
       <Parameter Name="RoleIsActive" Mode="In" Type="Boolean" />
     </FunctionImport>
+    <EntitySet Name="Cities" EntityType="blogsModel.City" />
+    <AssociationSet Name="FK_Users_City" Association="blogsModel.FK_Users_City">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="GetAllActiveBlogsByUserId_Result">
     <Property Type="Int32" Name="BlogID" Nullable="false" />
@@ -730,4 +738,25 @@
     <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
     <Property Type="Int32" Name="OwnerID" Nullable="false" />
   </ComplexType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CountryId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="blogsModel.FK_Users_City" FromRole="City" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_Users_City">
+    <End Type="blogsModel.City" Role="City" Multiplicity="0..1" />
+    <End Type="blogsModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

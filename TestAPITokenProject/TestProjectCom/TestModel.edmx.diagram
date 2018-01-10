@@ -20,6 +20,8 @@
         <AssociationConnector Association="blogsModel.FK_Posts_Users" ManuallyRouted="false" />
         <AssociationConnector Association="blogsModel.FK_Users_UserRoles" ManuallyRouted="false" />
         <AssociationConnector Association="blogsModel.FK_BlogContributers_Users" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="blogsModel.City" Width="1.5" PointX="3.375" PointY="7.875" />
+        <AssociationConnector Association="blogsModel.FK_Users_City" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

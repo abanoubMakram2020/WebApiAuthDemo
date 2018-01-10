@@ -79,6 +79,9 @@
     <Compile Include="BlogContributer.cs">
       <DependentUpon>TestModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="City.cs">
+      <DependentUpon>TestModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="Comment.cs">
       <DependentUpon>TestModel.tt</DependentUpon>

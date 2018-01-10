@@ -31,11 +31,14 @@ namespace TestProjectCom
         public bool UserIsBlocked { get; set; }
         public string UserPhoto { get; set; }
         public int FKRoleID { get; set; }
-
+        public Nullable<System.DateTime> CreateDate { get; set; }
+        public Nullable<int> CityId { get; set; }
+    
         public virtual ICollection<Blog> Blogs { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
         public virtual UserRole UserRole { get; set; }
         public virtual ICollection<BlogContributer> BlogContributers { get; set; }
+        public virtual City City { get; set; }
     }
 }

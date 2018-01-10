@@ -55,3 +55,4 @@ C:\Users\mhegab\Source\Repos\WebApiAuthDemo\TestAPITokenProject\TestProjectCom\b
 C:\Users\mhegab\Source\Repos\WebApiAuthDemo\TestAPITokenProject\TestProjectCom\bin\Debug\Newtonsoft.Json.xml
 C:\Users\mhegab\Source\Repos\WebApiAuthDemo\TestAPITokenProject\TestProjectCom\obj\Debug\TestProjectCom.dll
 C:\Users\mhegab\Source\Repos\WebApiAuthDemo\TestAPITokenProject\TestProjectCom\obj\Debug\TestProjectCom.pdb
+C:\Users\mhegab\Source\Repos\WebApiAuthDemo\TestAPITokenProject\TestProjectCom\obj\Debug\TestProjectCom.csprojResolveAssemblyReference.cache

@@ -35,6 +35,7 @@ namespace TestProjectCom
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<BlogContributer> BlogContributers { get; set; }
+        public DbSet<City> Cities { get; set; }
     
         public virtual int ChangeBlogActivateStatus(Nullable<int> blogId, Nullable<bool> blogIsActive)
         {
