@@ -16,7 +16,7 @@ namespace TestAPITokenProject.Controllers
         [HttpGet]
         // GET: AddtionalData
 
-        public object GetCities(int CountryID)
+        public object GetCities(int? CountryID)
         {
             return dbContext.Cities.Where(x => x.CountryId == CountryID).Select(x => new
             {

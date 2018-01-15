@@ -42,7 +42,7 @@ namespace TestAPITokenProject.Models
 
             this.CreateDate    = oUser.CreateDate;
             this.CityId = oUser.CityId;
-            this.CountryId = oUser.City == null ? 0 : oUser.City.CountryId;
+            this.CountryId = oUser.City == null ? null : (int?)oUser.City.CountryId;
         }
 
         public List<Test> lMappListOfEntity(List<User> lUser)
@@ -67,7 +67,7 @@ namespace TestAPITokenProject.Models
 
                     CreateDate = item.CreateDate,
                     CityId = item.CityId,
-                    CountryId = item.City == null ? 0 : item.City.CountryId
+                    CountryId = item.City == null ? null : (int?)item.City.CountryId
                 });
             }
             return lTest;

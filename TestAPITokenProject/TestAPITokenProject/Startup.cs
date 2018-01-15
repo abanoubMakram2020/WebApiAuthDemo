@@ -40,7 +40,7 @@ namespace TestAPITokenProject
             {
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/token"),
-                AccessTokenExpireTimeSpan = new TimeSpan(0,20,00), // TimeSpan.FromDays(0.011123456),//TimeSpan.FromDays(1), 16 minute
+                AccessTokenExpireTimeSpan = new TimeSpan(0,0,30), // TimeSpan.FromDays(0.011123456),//TimeSpan.FromDays(1), 16 minute
                 Provider = myProvider,
                 RefreshTokenProvider = new RefreshTokenProvider(),
             };
@@ -49,6 +49,7 @@ namespace TestAPITokenProject
         }
     }
 
+    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     public class RefreshTokenProvider : IAuthenticationTokenProvider
     {
         private static ConcurrentDictionary<string, AuthenticationTicket> _refreshTokens = new ConcurrentDictionary<string, AuthenticationTicket>();
@@ -60,7 +61,7 @@ namespace TestAPITokenProject
             var refreshTokenProperties = new AuthenticationProperties(context.Ticket.Properties.Dictionary)
             {
                 IssuedUtc = context.Ticket.Properties.IssuedUtc,
-                ExpiresUtc = DateTime.UtcNow.AddMinutes(2)//DateTime.UtcNow.AddYears(1)
+                ExpiresUtc = DateTime.UtcNow.AddMinutes(20)//DateTime.UtcNow.AddYears(1)
             };
             var refreshTokenTicket = new AuthenticationTicket(context.Ticket.Identity, refreshTokenProperties);
 

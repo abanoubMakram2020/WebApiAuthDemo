@@ -106,6 +106,9 @@ namespace TestAPITokenProject.Controllers
 
                         vUser.UserRole = oUser.UserRole;
                         vUser.UserIsBlocked = oUser.UserIsBlocked;
+                        vUser.CityId = oUser.CityId;
+                        vUser.CreateDate = oUser.CreateDate;
+
                         dbContext.SaveChanges();
                         // return Request.CreateResponse(HttpStatusCode.OK, vUser);
                         return 1;

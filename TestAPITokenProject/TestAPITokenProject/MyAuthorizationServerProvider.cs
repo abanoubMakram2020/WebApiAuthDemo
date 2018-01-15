@@ -15,7 +15,7 @@ namespace TestAPITokenProject
         public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
             string sGrantType = context.Parameters["grant_type"];
-            if (sGrantType.ToLower() == "password")
+            if ((sGrantType+"").ToLower() == "password")
             {
                 string sUserEmail = context.Parameters["username"];
                 string sPassword = context.Parameters["password"];
@@ -30,7 +30,7 @@ namespace TestAPITokenProject
                     context.Rejected();
                 }
             }
-            else if (sGrantType.ToLower() == "refresh_token")
+            else if ((sGrantType + "").ToLower() == "refresh_token")
             {
                 context.Validated();
             }
